@@ -15,16 +15,26 @@ public class Sylvie {
         new Textbox(text).print();
     }
 
-    /**
-     * Adds task to static variable list
-     * 
-     * @param task
-     */
-    private static void addTask(String description) {
-        Task task = new Task(description);
-        StringBuilder sb = new StringBuilder("added: ");
-        new Textbox(sb.append(description).toString()).print();
+    private static void addTask(Task task) {
+        String s = String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task,
+                list.size() + 1);
         list.add(task);
+        new Textbox(s).print();
+    }
+
+    private static void addTask(String description) {
+        Task task = new ToDo(description);
+        addTask(task);
+    }
+
+    private static void addTask(String description, String by) {
+        Task task = new Deadline(description, by);
+        addTask(task);
+    }
+
+    private static void addTask(String description, String from, String to) {
+        Task task = new Event(description, from, to);
+        addTask(task);
     }
 
     /**
@@ -62,7 +72,6 @@ public class Sylvie {
             task.markNotDone();
             new Textbox(String.format("Okay! I've' marked this task as not done yet:\n%s", task)).print();
         }
-
     }
 
     public static void main(String[] args) {
@@ -81,15 +90,14 @@ public class Sylvie {
                     continue;
                 }
 
-                String[] words = line.split("\\s+");
-                if ((words[0].equalsIgnoreCase("mark") || words[0].equalsIgnoreCase("unmark")) && words.length == 2) {
+                String[] parts = line.split("\\s+", 2);
+                String command = parts.length > 1 ? parts[0] : "";
+                String rest = parts.length > 1 ? parts[1] : "";
+
+                if ((command.equalsIgnoreCase("mark") || command.equalsIgnoreCase("unmark"))) {
                     try {
-                        int index = Integer.parseInt(words[1]) - 1; // -1 since ArrayList is 0-indexed
-                        if (words[0].equalsIgnoreCase("mark")) {
-                            updateTaskStatus(index, true);
-                        } else {
-                            updateTaskStatus(index, false);
-                        }
+                        int index = Integer.parseInt(rest) - 1; // -1 since ArrayList is 0-indexed
+                        updateTaskStatus(index, command.equalsIgnoreCase("mark"));
                     } catch (NumberFormatException e) {
                         new Textbox("Please give a valid ID...").print();
                     }
@@ -97,8 +105,27 @@ public class Sylvie {
                     continue;
                 }
 
-                if (!line.isEmpty()) {
-                    addTask(line);
+                if (command.equalsIgnoreCase("todo")) {
+                    addTask(rest);
+                    continue;
+                }
+
+                if (command.equalsIgnoreCase("deadline")) {
+                    String[] split = rest.split("/by", 2);
+                    String description = split.length > 0 ? split[0].trim() : "";
+                    System.out.println(split.length);
+                    String by = split.length > 1 ? split[1].trim() : "";
+                    addTask(description, by);
+                    continue;
+                }
+
+                if (command.equalsIgnoreCase("event")) {
+                    String[] split = rest.split("/from|/to", 3);
+                    String description = split.length > 0 ? split[0].trim() : "";
+                    String from = split.length > 1 ? split[1].trim() : "";
+                    String to = split.length > 2 ? split[2].trim() : "";
+                    addTask(description, from, to);
+                    continue;
                 }
             }
             
