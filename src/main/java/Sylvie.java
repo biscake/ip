@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Sylvie {
-    private static List<String> list = new ArrayList<>();
+    private static List<Task> list = new ArrayList<>();
 
     private static void greet() {
         String text = "Hello! I'm Sylvie\nWhat can I do for you?";
@@ -20,9 +20,10 @@ public class Sylvie {
      * 
      * @param task
      */
-    private static void addTask(String task) {
+    private static void addTask(String description) {
+        Task task = new Task(description);
         StringBuilder sb = new StringBuilder("added: ");
-        new Textbox(sb.append(task).toString()).print();
+        new Textbox(sb.append(description).toString()).print();
         list.add(task);
     }
 
@@ -30,7 +31,7 @@ public class Sylvie {
      * Displays all tasks added in list
      */
     private static void displayList() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
 
         for (int i = 0; i < list.size(); i++) {
             String index = String.format("%d. ", i + 1);
@@ -40,6 +41,30 @@ public class Sylvie {
         new Textbox(sb.toString()).print();
     }
 
+    /**
+     * Update status of task specified by index
+     * 
+     * @param index index of task stored in list
+     * @param done mark task done as true or false
+     */
+    private static void updateTaskStatus(int index, boolean done) {
+        if (index >= list.size() || index < 0) {
+            new Textbox("Sorry, I can't find the task with the ID").print();
+            return;
+        }
+
+        Task task = list.get(index);
+
+        if (done) {
+            task.markDone();
+            new Textbox(String.format("Nice! I've' marked this task as done:\n%s", task)).print();
+        } else {
+            task.markNotDone();
+            new Textbox(String.format("Okay! I've' marked this task as not done yet:\n%s", task)).print();
+        }
+
+    }
+
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
             greet();
@@ -47,12 +72,28 @@ public class Sylvie {
             while (true) {
                 String line = scanner.nextLine();
                 
-                if (line.toLowerCase().equals("bye")) {
+                if (line.equalsIgnoreCase("bye")) {
                     break;
                 }
 
-                if (line.toLowerCase().equals("list")) {
+                if (line.equalsIgnoreCase("list")) {
                     displayList();
+                    continue;
+                }
+
+                String[] words = line.split("\\s+");
+                if ((words[0].equalsIgnoreCase("mark") || words[0].equalsIgnoreCase("unmark")) && words.length == 2) {
+                    try {
+                        int index = Integer.parseInt(words[1]) - 1; // -1 since ArrayList is 0-indexed
+                        if (words[0].equalsIgnoreCase("mark")) {
+                            updateTaskStatus(index, true);
+                        } else {
+                            updateTaskStatus(index, false);
+                        }
+                    } catch (NumberFormatException e) {
+                        new Textbox("Please give a valid ID...").print();
+                    }
+
                     continue;
                 }
 
