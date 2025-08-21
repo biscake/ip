@@ -67,10 +67,10 @@ public class Sylvie {
 
         if (done) {
             task.markDone();
-            new Textbox(String.format("Nice! I've' marked this task as done:\n%s", task)).print();
+            new Textbox(String.format("Nice! I've marked this task as done:\n%s", task)).print();
         } else {
             task.markNotDone();
-            new Textbox(String.format("Okay! I've' marked this task as not done yet:\n%s", task)).print();
+            new Textbox(String.format("Okay! I've marked this task as not done yet:\n%s", task)).print();
         }
     }
 
@@ -113,7 +113,6 @@ public class Sylvie {
                 if (command.equalsIgnoreCase("deadline")) {
                     String[] split = rest.split("/by", 2);
                     String description = split.length > 0 ? split[0].trim() : "";
-                    System.out.println(split.length);
                     String by = split.length > 1 ? split[1].trim() : "";
                     addTask(description, by);
                     continue;
