@@ -17,6 +17,8 @@ public class CommandParser {
                     return new MarkNotDoneCommand(rest);
                 case "list":
                     return new ListCommand();
+                case "delete":
+                    return new DeleteCommand(rest);
                 case "bye":
                     return new ExitCommand();
                 default:
