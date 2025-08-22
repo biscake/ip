@@ -11,6 +11,10 @@ public class MarkDoneCommand extends Command {
     public void execute(List<Task> taskList) throws InvalidArgumentException {
         try {
             int index = Integer.parseInt(rest) - 1; // -1 since ArrayList is 0-indexed
+            if (index < 0 || index >= taskList.size()) {
+                throw new InvalidArgumentException("Invalid ID");
+            }
+            
             Task task = taskList.get(index);
             task.markDone();
             new Textbox(String.format("Okay! I've marked this task as done:\n%s", task)).print();
