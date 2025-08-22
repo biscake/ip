@@ -3,10 +3,23 @@ import java.util.List;
 public class AddEventCommand extends AddTaskCommand {
     private final String rest;
 
+    /**
+     * Creates a command that adds a Event task
+     * 
+     * @param rest the string after the "event" commmand word, representing
+     *             the description, from (/from) and to (/to) of the event Task
+     */
     public AddEventCommand(String rest) {
         this.rest = rest;
     }
 
+    /**
+     * Adds a Event task to the task list
+     * 
+     * @param taskList List of Task
+     * @throws InvalidArgumentException if description is blank, missing /from or /to,
+     *         blank /from or /to
+     */
     @Override
     public void execute(List<Task> taskList) throws InvalidArgumentException {
         int fromIndex = rest.indexOf("/from");

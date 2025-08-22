@@ -3,10 +3,20 @@ import java.util.List;
 public class MarkDoneCommand extends Command {
     private final String rest;
 
+    /**
+     * Create a mark done command
+     * 
+     * @param rest Rest of the user's input after "mark" command
+     */
     public MarkDoneCommand(String rest) {
         this.rest = rest;
     }
 
+    /**
+     * Marks the task specified by a ID as done
+     * 
+     * @param taskList List of task
+     */
     @Override
     public void execute(List<Task> taskList) throws InvalidArgumentException {
         try {

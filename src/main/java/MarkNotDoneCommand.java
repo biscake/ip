@@ -3,10 +3,20 @@ import java.util.List;
 public class MarkNotDoneCommand extends Command {
     private final String rest;
 
+    /**
+     * Create a mark not done command
+     * 
+     * @param rest Rest of the user's input after "unmark" command
+     */
     public MarkNotDoneCommand(String rest) {
         this.rest = rest;
     }
 
+    /**
+     * Marks the task specified by a ID as not done
+     * 
+     * @param taskList List of task
+     */
     @Override
     public void execute(List<Task> taskList) throws InvalidArgumentException {
         try {

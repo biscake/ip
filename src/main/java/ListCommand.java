@@ -2,6 +2,9 @@
 import java.util.List;
 
 public class ListCommand extends Command {
+    /**
+     * Prints a list of all current tasks
+     */
     @Override
     public void execute(List<Task> taskList) {
         if (taskList.isEmpty()) {

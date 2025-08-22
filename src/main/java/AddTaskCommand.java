@@ -2,6 +2,12 @@
 import java.util.List;
 
 abstract public class AddTaskCommand extends Command {
+    /**
+     * Adds the task to the list of Task and prints task added message.
+     * 
+     * @param task Task to be added
+     * @param taskList List that the task should be added to
+     */
     public void addTask(Task task, List<Task> taskList) {
         String s = String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task,
                 taskList.size() + 1);

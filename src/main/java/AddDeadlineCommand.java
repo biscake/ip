@@ -3,10 +3,23 @@ import java.util.List;
 public class AddDeadlineCommand extends AddTaskCommand {
     private final String rest;
 
+    /**
+     * Creates a command that adds a Deadline task
+     * 
+     * @param rest the string after the "deadline" commmand word, representing
+     *             the description, and by (/by) deadline of the Deadline Task
+     */
     public AddDeadlineCommand(String rest) {
         this.rest = rest;
     }
 
+    /**
+     * Adds a Deadline task to the task list
+     * 
+     * @param taskList List of Task
+     * @throws InvalidArgumentException if description is blank or missing /by or
+     *         by is blank
+     */
     @Override
     public void execute(List<Task> taskList) throws InvalidArgumentException {
         int byIndex = rest.indexOf("/by");
