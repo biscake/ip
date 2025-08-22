@@ -27,15 +27,30 @@
 
     ____________________________________
 
-    Nice! I've marked this task as done:
+    Okay! I've marked this task as done:
     [T][X] task1
     ____________________________________
 
     ____________________________________________
 
     Okay! I've marked this task as not done yet:
-    [D][ ] task2 (by: tomorrow)
+    [T][ ] task1
     ____________________________________________
+
+    __________________________________________
+
+    Here are the tasks in your list:
+    1. [T][ ] task1
+    2. [D][ ] task2 (by: tomorrow)
+    3. [E][ ] task 3 (from: now, to: tomorrow)
+    __________________________________________
+
+    _________________________________
+
+    Noted. I've removed this task:
+      [T][ ] task1
+    Now you have 2 tasks in the list.
+    _________________________________
 
     ____________________________________
 
