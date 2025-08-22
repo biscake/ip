@@ -24,7 +24,7 @@ public class Sylvie {
                     if (command.isExit()) {
                         break;
                     }
-                } catch (IllegalArgumentException e) {
+                } catch (SylvieException e) {
                     new Textbox(e.getMessage()).print();
                 }
             }

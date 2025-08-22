@@ -9,9 +9,9 @@ public class AddTodoCommand extends AddTaskCommand {
     }
 
     @Override
-    public void execute(List<Task> taskList) {
+    public void execute(List<Task> taskList) throws InvalidArgumentException {
         if (rest.isBlank()) {
-            throw new IllegalArgumentException("Description of a todo cannot be empty.");
+            throw new InvalidArgumentException("Description of a todo cannot be empty.");
         }
 
         Task task = new ToDo(rest);

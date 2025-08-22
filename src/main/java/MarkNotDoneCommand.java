@@ -8,14 +8,14 @@ public class MarkNotDoneCommand extends Command {
     }
 
     @Override
-    public void execute(List<Task> taskList) {
+    public void execute(List<Task> taskList) throws InvalidArgumentException {
         try {
             int index = Integer.parseInt(rest) - 1; // -1 since ArrayList is 0-indexed
             Task task = taskList.get(index);
             task.markNotDone();
             new Textbox(String.format("Okay! I've marked this task as not done yet:\n%s", task)).print();
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid ID");
+            throw new InvalidArgumentException("Invalid ID");
         }
     }
 }

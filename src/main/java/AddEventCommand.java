@@ -8,7 +8,7 @@ public class AddEventCommand extends AddTaskCommand {
     }
 
     @Override
-    public void execute(List<Task> taskList) {
+    public void execute(List<Task> taskList) throws InvalidArgumentException {
         int fromIndex = rest.indexOf("/from");
         int toIndex = rest.indexOf("/to");
 
@@ -17,7 +17,7 @@ public class AddEventCommand extends AddTaskCommand {
             String from, to;
 
             if (description.isBlank()) {
-                throw new IllegalArgumentException("Description of an event cannot be empty.");
+                throw new InvalidArgumentException("Description of an event cannot be empty.");
             }
 
             if (fromIndex < toIndex) {
@@ -31,7 +31,7 @@ public class AddEventCommand extends AddTaskCommand {
             Task task = new Event(description, from, to);
             super.addTask(task, taskList);
         } else {
-            throw new IllegalArgumentException("From (/from) and To (/to) required for event");
+            throw new InvalidArgumentException("From (/from) and To (/to) required for event");
         }
     }
 }
