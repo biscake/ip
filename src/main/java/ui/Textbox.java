@@ -1,3 +1,5 @@
+package ui;
+
 public class Textbox {
     private final String message;
 

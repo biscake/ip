@@ -1,4 +1,8 @@
+package command;
+import exception.InvalidArgumentException;
 import java.util.List;
+import task.Event;
+import task.Task;
 
 public class AddEventCommand extends AddTaskCommand {
     private final String rest;

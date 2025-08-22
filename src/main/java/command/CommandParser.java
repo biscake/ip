@@ -1,3 +1,4 @@
+package command;
 public class CommandParser {
     /**
      * Parse command given a input string
@@ -11,24 +12,31 @@ public class CommandParser {
             String rest = parts.length > 1 ? parts[1] : "";
 
             switch (command) {
-                case "todo":
+                case "todo" -> {
                     return new AddTodoCommand(rest);
-                case "deadline":
+            }
+                case "deadline" -> {
                     return new AddDeadlineCommand(rest);
-                case "event":
+            }
+                case "event" -> {
                     return new AddEventCommand(rest);
-                case "mark":
+            }
+                case "mark" -> {
                     return new MarkDoneCommand(rest);
-                case "unmark":
+            }
+                case "unmark" -> {
                     return new MarkNotDoneCommand(rest);
-                case "list":
+            }
+                case "list" -> {
                     return new ListCommand();
-                case "delete":
+            }
+                case "delete" -> {
                     return new DeleteCommand(rest);
-                case "bye":
+            }
+                case "bye" -> {
                     return new ExitCommand();
-                default:
-                    throw new IllegalArgumentException("Sorry! I don't understand what you mean.");
+            }
+                default -> throw new IllegalArgumentException("Sorry! I don't understand what you mean.");
             }
     }
 }

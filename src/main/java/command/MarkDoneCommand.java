@@ -1,19 +1,23 @@
+package command;
+import exception.InvalidArgumentException;
 import java.util.List;
+import task.Task;
+import ui.Textbox;
 
-public class MarkNotDoneCommand extends Command {
+public class MarkDoneCommand extends Command {
     private final String rest;
 
     /**
-     * Create a mark not done command
+     * Create a mark done command
      * 
-     * @param rest Rest of the user's input after "unmark" command
+     * @param rest Rest of the user's input after "mark" command
      */
-    public MarkNotDoneCommand(String rest) {
+    public MarkDoneCommand(String rest) {
         this.rest = rest;
     }
 
     /**
-     * Marks the task specified by a ID as not done
+     * Marks the task specified by a ID as done
      * 
      * @param taskList List of task
      */
@@ -26,8 +30,8 @@ public class MarkNotDoneCommand extends Command {
             }
             
             Task task = taskList.get(index);
-            task.markNotDone();
-            new Textbox(String.format("Okay! I've marked this task as not done yet:\n%s", task)).print();
+            task.markDone();
+            new Textbox(String.format("Okay! I've marked this task as done:\n%s", task)).print();
         } catch (NumberFormatException e) {
             throw new InvalidArgumentException("Invalid ID");
         }

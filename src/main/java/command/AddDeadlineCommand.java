@@ -1,4 +1,8 @@
+package command;
+import exception.InvalidArgumentException;
 import java.util.List;
+import task.Deadline;
+import task.Task;
 
 public class AddDeadlineCommand extends AddTaskCommand {
     private final String rest;
