@@ -1,8 +1,8 @@
-package command;
-import exception.InvalidArgumentException;
+package sylvie.command;
 import java.util.List;
-import task.Deadline;
-import task.Task;
+import sylvie.exception.InvalidArgumentException;
+import sylvie.task.Deadline;
+import sylvie.task.Task;
 
 public class AddDeadlineCommand extends AddTaskCommand {
     private final String rest;

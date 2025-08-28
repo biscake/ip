@@ -1,9 +1,10 @@
-package command;
+package sylvie.command;
 
-import exception.InvalidArgumentException;
 import java.util.List;
-import task.Task;
-import task.ToDo;
+
+import sylvie.exception.InvalidArgumentException;
+import sylvie.task.Task;
+import sylvie.task.ToDo;
 
 public class AddTodoCommand extends AddTaskCommand {
     private final String rest;

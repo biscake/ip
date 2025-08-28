@@ -1,4 +1,4 @@
-package task;
+package sylvie.task;
 
 public class Task {
     private final String description;

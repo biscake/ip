@@ -1,4 +1,4 @@
-package ui;
+package sylvie.ui;
 
 public class Textbox {
     private final String message;

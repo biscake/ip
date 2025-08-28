@@ -1,8 +1,9 @@
-package command;
+package sylvie.command;
 
-import exception.InvalidArgumentException;
 import java.util.List;
-import task.Task;
+
+import sylvie.exception.InvalidArgumentException;
+import sylvie.task.Task;
 
 public abstract class Command {
     abstract public void execute(List<Task> taskList) throws InvalidArgumentException;

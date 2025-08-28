@@ -1,4 +1,4 @@
-package command;
+package sylvie.command;
 public class CommandParser {
     /**
      * Parse command given a input string

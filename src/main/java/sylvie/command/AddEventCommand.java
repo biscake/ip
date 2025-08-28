@@ -1,8 +1,9 @@
-package command;
-import exception.InvalidArgumentException;
+package sylvie.command;
 import java.util.List;
-import task.Event;
-import task.Task;
+
+import sylvie.exception.InvalidArgumentException;
+import sylvie.task.Event;
+import sylvie.task.Task;
 
 public class AddEventCommand extends AddTaskCommand {
     private final String rest;

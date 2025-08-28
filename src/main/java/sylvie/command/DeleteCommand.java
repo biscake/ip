@@ -1,9 +1,10 @@
-package command;
+package sylvie.command;
 
-import exception.InvalidArgumentException;
 import java.util.List;
-import task.Task;
-import ui.Textbox;
+
+import sylvie.exception.InvalidArgumentException;
+import sylvie.task.Task;
+import sylvie.ui.Textbox;
 
 public class DeleteCommand extends Command {
     private final String rest;

@@ -1,4 +1,4 @@
-package exception;
+package sylvie.exception;
 public class SylvieException extends Exception {
     public SylvieException(String message) {
         super(message);
