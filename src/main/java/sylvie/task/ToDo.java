@@ -14,4 +14,10 @@ public class ToDo extends Task {
         String s = String.format("[T]%s", super.toString());
         return s;
     }
+
+    @Override
+    public String toStorageString() {
+        String s = String.format("T | %d | %s", super.isDone ? 1 : 0, super.description);
+        return s;
+    }
 }

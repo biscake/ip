@@ -1,12 +1,10 @@
 package sylvie.command;
 
-import java.util.List;
-
 import sylvie.exception.InvalidArgumentException;
-import sylvie.task.Task;
+import sylvie.task.TaskList;
 
 public abstract class Command {
-    abstract public void execute(List<Task> taskList) throws InvalidArgumentException;
+    abstract public void execute(TaskList taskList) throws InvalidArgumentException;
 
     /**
      * @return Returns whether should the command exit the chatbot

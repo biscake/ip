@@ -1,8 +1,6 @@
 package sylvie.command;
 
-import java.util.List;
-
-import sylvie.task.Task;
+import sylvie.task.TaskList;
 import sylvie.ui.Textbox;
 
 public class ExitCommand extends Command {
@@ -10,7 +8,7 @@ public class ExitCommand extends Command {
      * Prints exit message
      */
     @Override
-    public void execute(List<Task> taskList) {
+    public void execute(TaskList taskList) {
         String text = "Bye bye! Hope to see you again soon!";
         new Textbox(text).print();
     }

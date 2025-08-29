@@ -1,8 +1,8 @@
 package sylvie.command;
-import java.util.List;
 import sylvie.exception.InvalidArgumentException;
 import sylvie.task.Deadline;
 import sylvie.task.Task;
+import sylvie.task.TaskList;
 
 public class AddDeadlineCommand extends AddTaskCommand {
     private final String rest;
@@ -25,7 +25,7 @@ public class AddDeadlineCommand extends AddTaskCommand {
      *         by is blank
      */
     @Override
-    public void execute(List<Task> taskList) throws InvalidArgumentException {
+    public void execute(TaskList taskList) throws InvalidArgumentException {
         int byIndex = rest.indexOf("/by");
 
         if (byIndex != -1) {

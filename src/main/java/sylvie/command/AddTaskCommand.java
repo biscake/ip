@@ -1,8 +1,7 @@
 package sylvie.command;
 
-import java.util.List;
-
 import sylvie.task.Task;
+import sylvie.task.TaskList;
 import sylvie.ui.Textbox;
 
 abstract public class AddTaskCommand extends Command {
@@ -12,7 +11,7 @@ abstract public class AddTaskCommand extends Command {
      * @param task Task to be added
      * @param taskList List that the task should be added to
      */
-    public void addTask(Task task, List<Task> taskList) {
+    public void addTask(Task task, TaskList taskList) {
         String s = String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task,
                 taskList.size() + 1);
         taskList.add(task);

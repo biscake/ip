@@ -1,9 +1,8 @@
 package sylvie.command;
 
-import java.util.List;
-
 import sylvie.exception.InvalidArgumentException;
 import sylvie.task.Task;
+import sylvie.task.TaskList;
 import sylvie.ui.Textbox;
 
 public class DeleteCommand extends Command {
@@ -25,14 +24,14 @@ public class DeleteCommand extends Command {
      * @throws InvalidArgumentException if ID of task to be deleted is invalid
      */
     @Override
-    public void execute(List<Task> taskList) throws InvalidArgumentException {
+    public void execute(TaskList taskList) throws InvalidArgumentException {
         try {
             int index = Integer.parseInt(rest) - 1; // -1 since ArrayList is 0-indexed
             if (index < 0 || index >= taskList.size()) {
                 throw new InvalidArgumentException("Invalid ID");
             }
 
-            Task task = taskList.remove(index);
+            Task task = taskList.delete(index);
             new Textbox(String
                     .format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.", task,
                             taskList.size())

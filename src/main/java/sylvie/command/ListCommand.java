@@ -1,8 +1,6 @@
 package sylvie.command;
 
-import java.util.List;
-
-import sylvie.task.Task;
+import sylvie.task.TaskList;
 import sylvie.ui.Textbox;
 
 public class ListCommand extends Command {
@@ -10,7 +8,7 @@ public class ListCommand extends Command {
      * Prints a list of all current tasks
      */
     @Override
-    public void execute(List<Task> taskList) {
+    public void execute(TaskList taskList) {
         if (taskList.isEmpty()) {
             new Textbox("The list is currently empty.").print();
             return;

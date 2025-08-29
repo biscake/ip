@@ -1,8 +1,8 @@
 package sylvie.command;
-import java.util.List;
 
 import sylvie.exception.InvalidArgumentException;
 import sylvie.task.Task;
+import sylvie.task.TaskList;
 import sylvie.ui.Textbox;
 
 public class MarkDoneCommand extends Command {
@@ -23,7 +23,7 @@ public class MarkDoneCommand extends Command {
      * @param taskList List of task
      */
     @Override
-    public void execute(List<Task> taskList) throws InvalidArgumentException {
+    public void execute(TaskList taskList) throws InvalidArgumentException {
         try {
             int index = Integer.parseInt(rest) - 1; // -1 since ArrayList is 0-indexed
             if (index < 0 || index >= taskList.size()) {
@@ -31,7 +31,7 @@ public class MarkDoneCommand extends Command {
             }
             
             Task task = taskList.get(index);
-            task.markDone();
+            taskList.markTaskDone(index);
             new Textbox(String.format("Okay! I've marked this task as done:\n%s", task)).print();
         } catch (NumberFormatException e) {
             throw new InvalidArgumentException("Invalid ID");

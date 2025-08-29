@@ -1,7 +1,7 @@
 package sylvie.task;
 public class Event extends Task {
-    private final String from;
-    private final String to;
+    final String from;
+    final String to;
 
     /**
      * Create a Event task 
@@ -19,6 +19,12 @@ public class Event extends Task {
     @Override
     public String toString() {
         String s = String.format("[E]%s (from: %s, to: %s)", super.toString(), from, to);
+        return s;
+    }
+
+    @Override
+    public String toStorageString() {
+        String s = String.format("E | %d | %s ^ %s ^ %s", super.isDone ? 1 : 0, super.description, this.from, this.to);
         return s;
     }
 }

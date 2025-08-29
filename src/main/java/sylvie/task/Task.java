@@ -1,8 +1,8 @@
 package sylvie.task;
 
-public class Task {
-    private final String description;
-    private boolean isDone;
+public abstract class Task {
+    final String description;
+    boolean isDone;
 
     /**
      * Create a Task
@@ -34,4 +34,6 @@ public class Task {
         sb.append(isDone ? "[X]" : "[ ]").append(" ").append(this.description);
         return sb.toString();
     }
+
+    abstract public String toStorageString();
 }

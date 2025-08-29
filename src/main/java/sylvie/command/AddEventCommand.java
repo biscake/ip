@@ -1,9 +1,9 @@
 package sylvie.command;
-import java.util.List;
 
 import sylvie.exception.InvalidArgumentException;
 import sylvie.task.Event;
 import sylvie.task.Task;
+import sylvie.task.TaskList;
 
 public class AddEventCommand extends AddTaskCommand {
     private final String rest;
@@ -26,7 +26,7 @@ public class AddEventCommand extends AddTaskCommand {
      *         blank /from or /to
      */
     @Override
-    public void execute(List<Task> taskList) throws InvalidArgumentException {
+    public void execute(TaskList taskList) throws InvalidArgumentException {
         int fromIndex = rest.indexOf("/from");
         int toIndex = rest.indexOf("/to");
 
