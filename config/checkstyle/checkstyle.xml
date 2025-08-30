@@ -393,7 +393,7 @@
 
     <module name="InvalidJavadocPosition"/>
 
-    <module name="MissingJavadocMethod">
+    <module name="MissingJavadocMethodCheck">
       <property name="minLineCount" value="1"/>
       <property name="allowMissingPropertyJavadoc" value="true"/>
       <property name="ignoreMethodNamesRegex" value="(set.*|get.*)"/>
