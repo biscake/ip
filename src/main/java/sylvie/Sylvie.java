@@ -1,4 +1,7 @@
+package sylvie;
+
 import java.util.Scanner;
+
 import sylvie.command.Command;
 import sylvie.command.parser.CommandParser;
 import sylvie.exception.SylvieException;
@@ -18,11 +21,11 @@ public class Sylvie {
 
         try (Scanner scanner = new Scanner(System.in)) {
             greet();
-            
+
             while (true) {
                 try {
                     String line = scanner.nextLine();
-                    
+
                     Command command = CommandParser.parse(line);
                     command.execute(taskList);
 
@@ -34,5 +37,7 @@ public class Sylvie {
                 }
             }
         }
+
+        System.exit(0);
     }
 }
