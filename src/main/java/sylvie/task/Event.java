@@ -1,7 +1,12 @@
 package sylvie.task;
+
+import java.time.temporal.Temporal;
+import sylvie.exception.InvalidArgumentException;
+import sylvie.time.Date;
+
 public class Event extends Task {
-    final String from;
-    final String to;
+    Temporal from;
+    Temporal to;
 
     /**
      * Create a Event task 
@@ -10,15 +15,35 @@ public class Event extends Task {
      * @param from Start time of the event
      * @param to End time of the event
      */
-    public Event(String description, String from, String to) {
+    public Event(String description, String from, String to) throws InvalidArgumentException {
         super(description);
-        this.from = from;
-        this.to = to;
+
+        if (from.isBlank()) {
+            throw new InvalidArgumentException("Start date (/from) cannot be empty");
+        }
+
+        if (to.isBlank()) {
+            throw new InvalidArgumentException("End date (/to) cannot be empty");
+        }
+
+        try {
+            this.from = Date.parse(from);
+            this.to = Date.parse(to);
+        } catch (InvalidArgumentException e) {
+            throw new InvalidArgumentException("Invalid deadline format (yyyy-MM-dd HHmm)");
+        }
     }
 
     @Override
     public String toString() {
-        String s = String.format("[E]%s (from: %s, to: %s)", super.toString(), from, to);
+        String fromString = " ", toString = "";
+        try {
+            fromString = Date.toDateString(from);
+            toString = Date.toDateString(to);
+        } catch (InvalidArgumentException e) {
+        }
+
+        String s = String.format("[E]%s (from: %s, to: %s)", super.toString(), fromString, toString);
         return s;
     }
 

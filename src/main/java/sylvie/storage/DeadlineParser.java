@@ -1,6 +1,7 @@
 package sylvie.storage;
 
 import sylvie.exception.IllegalDataException;
+import sylvie.exception.InvalidArgumentException;
 import sylvie.task.Deadline;
 import sylvie.task.Task;
 
@@ -11,10 +12,10 @@ public class DeadlineParser extends TaskParser {
         String description = parts.length > 0 ? parts[0].trim() : "";
         String deadline = parts.length > 1 ? parts[1].trim() : "";
 
-        if (description.isBlank() || deadline.isBlank()) {
+        try {
+            return new Deadline(description, deadline);
+        } catch (InvalidArgumentException e) {
             throw new IllegalDataException("Failed to load deadline data");
         }
-
-        return new Deadline(description, deadline);
     }
 }

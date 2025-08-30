@@ -1,7 +1,9 @@
 package sylvie.task;
 
+import sylvie.exception.InvalidArgumentException;
+
 public abstract class Task {
-    final String description;
+    String description;
     boolean isDone;
 
     /**
@@ -9,7 +11,11 @@ public abstract class Task {
      * 
      * @param description description of the task
      */
-    public Task(String description) {
+    public Task(String description) throws InvalidArgumentException {
+        if (description.isBlank()) {
+            throw new InvalidArgumentException("Description cannot be empty");
+        }
+
         this.description = description;
         this.isDone = false;
     }

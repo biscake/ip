@@ -1,3 +1,5 @@
 T | 0 | aksljdasdfalk
-D | 1 | aksljdfaaaaaaaaaalk ^ 3pm
-E | 1 | kjaldksfj ^ alsdkjl ^ klasd
+D | 1 | aksljdfaaaaaaaaaalk ^ 2003-01-14 1500
+E | 1 | kjaldksfj ^ 190503 ^ 190603 1500
+D | 0 | asdjlfkl ^ null
+D | 0 | asdfjasldk ^ 2098-05-19T15:30

@@ -1,6 +1,7 @@
 package sylvie.storage;
 
 import sylvie.exception.IllegalDataException;
+import sylvie.exception.InvalidArgumentException;
 import sylvie.task.Event;
 import sylvie.task.Task;
 
@@ -12,10 +13,10 @@ public class EventParser extends TaskParser {
         String from = parts.length > 1 ? parts[1].trim() : "";
         String to = parts.length > 2 ? parts[2].trim() : "";
 
-        if (description.isBlank() || from.isBlank() || to.isBlank()) {
+        try {
+            return new Event(description, from, to);
+        } catch (InvalidArgumentException e) {
             throw new IllegalDataException("Failed to load event data");
         }
-        
-        return new Event(description, from, to);
     }
 }

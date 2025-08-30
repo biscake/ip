@@ -9,21 +9,21 @@ import sylvie.storage.Storage;
 import sylvie.ui.Textbox;
 
 public class TaskList {
-    private List<Task> taskList = new ArrayList<>();
+    private final List<Task> TASKLIST = new ArrayList<>();
 
     public Task get(int idx) {
-        return this.taskList.get(idx);
+        return this.TASKLIST.get(idx);
     }
 
     public void add(Task task) {
-        this.taskList.add(task);
+        this.TASKLIST.add(task);
         Storage.add(task);
     }
 
     public Task delete(int idx) {
-        Task task = taskList.get(idx);
+        Task task = TASKLIST.get(idx);
         Storage.remove(task);
-        this.taskList.remove(idx);
+        this.TASKLIST.remove(idx);
 
         return task;
     }
@@ -33,30 +33,38 @@ public class TaskList {
         try {
             lines = Storage.load();
             for (String line : lines) {
-                taskList.add(Parser.parse(line));
+                try {
+                    Task task = Parser.parse(line);
+                    if (task == null) {
+                        continue;
+                    }
+
+                    TASKLIST.add(task);
+                } catch (IllegalDataException e) {
+                    new Textbox(e.getMessage()).print();
+                }
             }
-        } catch (IOException | IllegalDataException e) {
+        } catch (IOException e) {
             new Textbox(e.getMessage()).print();
-            this.taskList = new ArrayList<>();
         }
     }
 
     public int size() {
-        return this.taskList.size();
+        return this.TASKLIST.size();
     }
 
     public boolean isEmpty() {
-        return this.taskList.isEmpty();
+        return this.TASKLIST.isEmpty();
     }
 
     public void markTaskDone(int idx) {
-        Task task = taskList.get(idx);
+        Task task = TASKLIST.get(idx);
         Storage.updateDoneStatus(task, true);
         task.markDone();
     }
 
     public void markTaskNotDone(int idx) {
-        Task task = taskList.get(idx);
+        Task task = TASKLIST.get(idx);
         Storage.updateDoneStatus(task, false);
         task.markNotDone();
     }

@@ -11,6 +11,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import sylvie.task.Task;
+import sylvie.ui.Textbox;
 
 public class Storage {
     private final static Path path = Paths.get("data", "sylvie.txt");
@@ -44,7 +45,7 @@ public class Storage {
             writer.write(task.toStorageString());
             writer.newLine();
         } catch (IOException e) {
-            e.printStackTrace();
+            new Textbox("Failed to save data.").print();
         }
     }
     
@@ -73,7 +74,7 @@ public class Storage {
 
             Files.move(tempPath, path, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            e.printStackTrace();
+            new Textbox("Failed to save data.").print();
         }
     }
     
@@ -107,7 +108,7 @@ public class Storage {
 
             Files.move(tempPath, path, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            e.printStackTrace();
+            new Textbox("Failed to save data.").print();
         }
     }
 }
