@@ -1,4 +1,4 @@
-package sylvie.storage;
+package sylvie.storage.parser;
 
 import sylvie.exception.IllegalDataException;
 import sylvie.exception.InvalidArgumentException;

@@ -1,6 +1,6 @@
 import java.util.Scanner;
 import sylvie.command.Command;
-import sylvie.command.CommandParser;
+import sylvie.command.parser.CommandParser;
 import sylvie.exception.SylvieException;
 import sylvie.task.TaskList;
 import sylvie.ui.Textbox;

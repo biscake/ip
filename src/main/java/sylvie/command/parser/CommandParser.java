@@ -1,4 +1,15 @@
-package sylvie.command;
+package sylvie.command.parser;
+
+import sylvie.command.AddDeadlineCommand;
+import sylvie.command.AddEventCommand;
+import sylvie.command.AddTodoCommand;
+import sylvie.command.Command;
+import sylvie.command.DeleteCommand;
+import sylvie.command.ExitCommand;
+import sylvie.command.ListCommand;
+import sylvie.command.MarkDoneCommand;
+import sylvie.command.MarkNotDoneCommand;
+
 public class CommandParser {
     /**
      * Parse command given a input string
