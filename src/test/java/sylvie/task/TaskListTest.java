@@ -1,11 +1,12 @@
 package sylvie.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 import org.junit.jupiter.api.AfterEach;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,21 +17,21 @@ public class TaskListTest {
     private TaskList taskList;
 
     class StubToDo extends sylvie.task.Task {
-        String description;
+        private String tempDescription;
 
         public StubToDo(String description) throws InvalidArgumentException {
             super(description);
-            this.description = description;
+            this.tempDescription = description;
         }
 
         @Override
         public String toString() {
-            return "T | 0 | " + description;
+            return "T | 0 | " + tempDescription;
         }
 
         @Override
         public String toStorageString() {
-            return "T | 0 | " + description;
+            return "T | 0 | " + tempDescription;
         }
     }
 
@@ -54,7 +55,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void add_ToDoTask_success() throws InvalidArgumentException {
+    public void add_toDoTask_success() throws InvalidArgumentException {
         Task todo = new StubToDo("Test task");
         taskList.add(todo);
         assertEquals(1, taskList.size());

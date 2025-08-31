@@ -5,12 +5,15 @@ import sylvie.task.Task;
 import sylvie.task.TaskList;
 import sylvie.task.ToDo;
 
+/**
+ * Command to add a Todo task to the task list.
+ */
 public class AddTodoCommand extends AddTaskCommand {
     private final String rest;
 
     /**
      * Creates a command that adds a Todo task.
-     * 
+     *
      * @param rest the string after the "todo" commmand word, representing the description
      */
     public AddTodoCommand(String rest) {
@@ -19,7 +22,7 @@ public class AddTodoCommand extends AddTaskCommand {
 
     /**
      * Adds a Todo task to the task list.
-     * 
+     *
      * @param taskList List of Task
      * @throws InvalidArgumentException if description is blank
      */

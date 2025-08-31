@@ -9,6 +9,9 @@ import java.util.List;
 
 import sylvie.exception.InvalidArgumentException;
 
+/**
+ * Utility class for parsing and formatting dates.
+ */
 public class Date {
     private static final List<DateTimeFormatter> FORMATTERS = List.of(
         DateTimeFormatter.ISO_LOCAL_DATE,
@@ -44,7 +47,7 @@ public class Date {
 
         throw new InvalidArgumentException(errorMessage.toString());
     }
-    
+
     /**
      * Converts a Temporal object (LocalDate or LocalDateTime) to a formatted date string.
      * @param date the Temporal object to format

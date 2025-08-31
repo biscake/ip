@@ -10,21 +10,24 @@ import sylvie.storage.Storage;
 import sylvie.storage.parser.Parser;
 import sylvie.ui.Textbox;
 
+/**
+ * Manages a list of tasks and handles loading and saving to storage.
+ */
 public class TaskList {
-    private final List<Task> TASKLIST = new ArrayList<>();
-    private final Storage Storage;
+    private final List<Task> taskList = new ArrayList<>();
+    private final Storage storage;
 
     /**
      * Creates a TaskList object that manages a list of Task.
-     * 
+     *
      * @param path Path to the storage file
      */
     public TaskList(Path path) {
-        this.Storage = new Storage(path);
+        this.storage = new Storage(path);
     }
 
     public Task get(int idx) {
-        return this.TASKLIST.get(idx);
+        return this.taskList.get(idx);
     }
 
     /**
@@ -32,8 +35,8 @@ public class TaskList {
      * @param task the task to be added
      */
     public void add(Task task) {
-        this.TASKLIST.add(task);
-        Storage.add(task);
+        this.taskList.add(task);
+        storage.add(task);
     }
 
     /**
@@ -42,9 +45,9 @@ public class TaskList {
      * @return the deleted task
      */
     public Task delete(int idx) {
-        Task task = TASKLIST.get(idx);
-        Storage.remove(task);
-        this.TASKLIST.remove(idx);
+        Task task = taskList.get(idx);
+        storage.remove(task);
+        this.taskList.remove(idx);
 
         return task;
     }
@@ -55,7 +58,7 @@ public class TaskList {
     public void loadFromStorage() {
         List<String> lines;
         try {
-            lines = Storage.load();
+            lines = storage.load();
             for (String line : lines) {
                 try {
                     Task task = Parser.parse(line);
@@ -63,7 +66,7 @@ public class TaskList {
                         continue;
                     }
 
-                    TASKLIST.add(task);
+                    taskList.add(task);
                 } catch (IllegalDataException e) {
                     new Textbox(e.getMessage()).print();
                 }
@@ -75,41 +78,41 @@ public class TaskList {
 
     /**
      * Returns the number of tasks in the task list.
-     * 
+     *
      * @return the number of tasks in the task list
      */
     public int size() {
-        return this.TASKLIST.size();
+        return this.taskList.size();
     }
 
     /**
      * Checks if the task list is empty.
-     * 
+     *
      * @return true if the task list is empty, false otherwise
      */
     public boolean isEmpty() {
-        return this.TASKLIST.isEmpty();
+        return this.taskList.isEmpty();
     }
 
     /**
      * Marks a task as done and updates the storage file.
-     * 
+     *
      * @param idx the index of the task to be marked as done
      */
     public void markTaskDone(int idx) {
-        Task task = TASKLIST.get(idx);
-        Storage.updateDoneStatus(task, true);
+        Task task = taskList.get(idx);
+        storage.updateDoneStatus(task, true);
         task.markDone();
     }
 
     /**
      * Marks a task as not done and updates the storage file.
-     * 
+     *
      * @param idx the index of the task to be marked as not done
      */
     public void markTaskNotDone(int idx) {
-        Task task = TASKLIST.get(idx);
-        Storage.updateDoneStatus(task, false);
+        Task task = taskList.get(idx);
+        storage.updateDoneStatus(task, false);
         task.markNotDone();
     }
 }

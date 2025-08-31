@@ -3,10 +3,13 @@ package sylvie.storage.parser;
 import sylvie.exception.IllegalDataException;
 import sylvie.task.Task;
 
+/**
+ * Parses task data from strings.
+ */
 public class Parser {
     /**
      * Parse task given a input string
-     * 
+     *
      * @param input The user's input
      * @return task specified by the input string
      */
@@ -18,23 +21,23 @@ public class Parser {
         Task task;
 
         switch (type) {
-            case "T" -> {
-                task = new TodoParser().parse(rest);
-                break;
-            }
-            case "D" -> {
-                task = new DeadlineParser().parse(rest);
-                break;
-            }
-            case "E" -> {
-                task = new EventParser().parse(rest);
-                break;
-            }
-            default -> {
-                throw new Error("Failed to read data");
-            }
+        case "T" -> {
+            task = new TodoParser().parse(rest);
+            break;
         }
-        
+        case "D" -> {
+            task = new DeadlineParser().parse(rest);
+            break;
+        }
+        case "E" -> {
+            task = new EventParser().parse(rest);
+            break;
+        }
+        default -> {
+            throw new Error("Failed to read data");
+        }
+        }
+
         if (isDone) {
             task.markDone();
         }

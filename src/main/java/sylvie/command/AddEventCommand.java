@@ -5,12 +5,15 @@ import sylvie.task.Event;
 import sylvie.task.Task;
 import sylvie.task.TaskList;
 
+/**
+ * Command to add a Event task to the task list.
+ */
 public class AddEventCommand extends AddTaskCommand {
     private final String rest;
 
     /**
      * Creates a command that adds a Event task.
-     * 
+     *
      * @param rest the string after the "event" commmand word, representing
      *             the description, from (/from) and to (/to) of the event Task
      */
@@ -20,7 +23,7 @@ public class AddEventCommand extends AddTaskCommand {
 
     /**
      * Adds a Event task to the task list.
-     * 
+     *
      * @param taskList List of Task
      * @throws InvalidArgumentException if description is blank, missing /from or /to,
      *         blank /from or /to
@@ -32,7 +35,8 @@ public class AddEventCommand extends AddTaskCommand {
 
         if (fromIndex != -1 && toIndex != -1) {
             String description = rest.substring(0, Math.min(fromIndex, toIndex)).trim();
-            String from, to;
+            String from;
+            String to;
 
             if (description.isBlank()) {
                 throw new InvalidArgumentException("Description of an event cannot be empty.");

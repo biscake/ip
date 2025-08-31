@@ -14,16 +14,19 @@ import java.util.List;
 import sylvie.task.Task;
 import sylvie.ui.Textbox;
 
+/**
+ * Handles loading and saving of Sylvie data to a file.
+ */
 public class Storage {
     private final Path path;
 
     public Storage(Path path) {
         this.path = path;
     }
-    
+
     /**
      * Loads Sylvie data from filepath.
-     * 
+     *
      * @return List of line of data stored
      * @throws IOException
      */
@@ -47,7 +50,7 @@ public class Storage {
 
     /**
      * Saves a task to the storage file.
-     * 
+     *
      * @param task the task to be saved
      */
     public void add(Task task) {
@@ -58,10 +61,10 @@ public class Storage {
             new Textbox("Failed to save data.").print();
         }
     }
-    
+
     /**
      * Removes a task from the storage file.
-     * 
+     *
      * @param task the task to be removed
      */
     public void remove(Task task) {
@@ -92,10 +95,10 @@ public class Storage {
             new Textbox("Failed to save data.").print();
         }
     }
-    
+
     /**
      * Updates the done status of a task in the storage file.
-     * 
+     *
      * @param task the task to be updated
      * @param isDone the new done status of the task
      */
@@ -118,7 +121,7 @@ public class Storage {
                         for (int i = 0; i < parts.length; i++) {
                             parts[i] = parts[i].trim();
                         }
-                        
+
                         parts[1] = isDone ? "1" : "0";
                         line = String.join(" | ", parts);
                     }

@@ -5,11 +5,14 @@ import sylvie.exception.InvalidArgumentException;
 import sylvie.task.Deadline;
 import sylvie.task.Task;
 
+/**
+ * Parses input strings to create Deadline tasks.
+ */
 public class DeadlineParser extends TaskParser {
     /**
      * Parses a string input to create a Deadline task.
      * The input format is expected to be "description ^ deadline".
-     * 
+     *
      * @param input the string input containing the task details
      * @return a Deadline task created from the input details
      * @throws IllegalDataException if the input data is invalid

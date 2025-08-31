@@ -2,10 +2,13 @@ package sylvie.task;
 
 import sylvie.exception.InvalidArgumentException;
 
+/**
+ * Represents a ToDo task with a description.
+ */
 public class ToDo extends Task {
     /**
      * Creates a Todo task.
-     * 
+     *
      * @param description Description of the task
      */
     public ToDo(String description) throws InvalidArgumentException {

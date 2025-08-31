@@ -5,12 +5,15 @@ import java.time.temporal.Temporal;
 import sylvie.exception.InvalidArgumentException;
 import sylvie.time.Date;
 
+/**
+ * Represents a Deadline task with a description and a deadline.
+ */
 public class Deadline extends Task {
-    Temporal by;
+    private Temporal by;
 
     /**
      * Creates a Deadline Task.
-     * 
+     *
      * @param description description of task
      * @param by deadline of the task
      */
@@ -20,7 +23,7 @@ public class Deadline extends Task {
         if (by.isBlank()) {
             throw new InvalidArgumentException("Deadline (/by) cannot be empty");
         }
-        
+
         try {
             this.by = Date.parse(by);
         } catch (InvalidArgumentException e) {
@@ -30,10 +33,11 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String deadlineString = "";
+        String deadlineString;
         try {
             deadlineString = Date.toDateString(by);
         } catch (InvalidArgumentException e) {
+            deadlineString = "";
         }
 
         String s = String.format("[D]%s (by: %s)", super.toString(), deadlineString);

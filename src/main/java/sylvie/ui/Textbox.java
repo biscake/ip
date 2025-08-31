@@ -1,17 +1,20 @@
 package sylvie.ui;
 
+/**
+ * Represents a textbox that can display messages with borders and indentation.
+ */
 public class Textbox {
     private final String message;
+    private final int indentSize = 4;
 
     public Textbox(String message) {
         this.message = message;
     }
 
-    /**     
+    /**
      * * Prints the message in a textbox format with borders and indentation.
      */
     public void print() {
-        int INDENT_SIZE = 4;
         String[] lines = message.split("\n");
         int maxWidth = Integer.MIN_VALUE;
 
@@ -19,12 +22,12 @@ public class Textbox {
             String s = lines[i];
             maxWidth = Math.max(s.length(), maxWidth);
             StringBuilder sb = new StringBuilder(s);
-            lines[i] = sb.insert(0, indent(INDENT_SIZE)).toString();
+            lines[i] = sb.insert(0, indent(indentSize)).toString();
         }
 
-        printBorder(maxWidth, INDENT_SIZE);
+        printBorder(maxWidth, indentSize);
         System.out.println(String.join("\n", lines));
-        printBorder(maxWidth, INDENT_SIZE);
+        printBorder(maxWidth, indentSize);
     }
 
     private void printBorder(int width, int indentSize) {

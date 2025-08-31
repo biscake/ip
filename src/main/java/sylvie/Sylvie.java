@@ -10,6 +10,9 @@ import sylvie.exception.SylvieException;
 import sylvie.task.TaskList;
 import sylvie.ui.Textbox;
 
+/**
+ * Main class for the Sylvie chatbot application.
+ */
 public class Sylvie {
     private static void greet() {
         String text = "Hello! I'm Sylvie\nWhat can I do for you?";
@@ -20,7 +23,7 @@ public class Sylvie {
         Path savePath = Paths.get("data", "sylvie.txt");
         TaskList taskList = new TaskList(savePath);
         taskList.loadFromStorage();
-        
+
         try (Scanner scanner = new Scanner(System.in)) {
             greet();
 

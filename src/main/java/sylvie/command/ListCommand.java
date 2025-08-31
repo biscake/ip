@@ -3,10 +3,13 @@ package sylvie.command;
 import sylvie.task.TaskList;
 import sylvie.ui.Textbox;
 
+/**
+ * Command to list all tasks in the task list.
+ */
 public class ListCommand extends Command {
     /**
      * Executes the list command by displaying all tasks in the task list.
-     * 
+     *
      * @param taskList List of Task
      */
     @Override

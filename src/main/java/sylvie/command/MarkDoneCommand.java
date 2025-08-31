@@ -5,12 +5,15 @@ import sylvie.task.Task;
 import sylvie.task.TaskList;
 import sylvie.ui.Textbox;
 
+/**
+ * Command to mark a task as done.
+ */
 public class MarkDoneCommand extends Command {
     private final String rest;
 
     /**
      * Creates a mark done command.
-     * 
+     *
      * @param rest Rest of the user's input after "mark" command
      */
     public MarkDoneCommand(String rest) {
@@ -19,7 +22,7 @@ public class MarkDoneCommand extends Command {
 
     /**
      * Marks the task specified by a ID as done.
-     * 
+     *
      * @param taskList List of task
      */
     @Override
@@ -29,7 +32,7 @@ public class MarkDoneCommand extends Command {
             if (index < 0 || index >= taskList.size()) {
                 throw new InvalidArgumentException("Invalid ID");
             }
-            
+
             Task task = taskList.get(index);
             taskList.markTaskDone(index);
             new Textbox(String.format("Okay! I've marked this task as done:\n%s", task)).print();

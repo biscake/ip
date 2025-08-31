@@ -2,13 +2,16 @@ package sylvie.task;
 
 import sylvie.exception.InvalidArgumentException;
 
+/**
+ * Abstract class representing a Task with a description and completion status.
+ */
 public abstract class Task {
-    String description;
-    boolean isDone;
+    protected String description;
+    protected boolean isDone;
 
     /**
      * Create a Task
-     * 
+     *
      * @param description description of the task
      */
     public Task(String description) throws InvalidArgumentException {
@@ -43,8 +46,8 @@ public abstract class Task {
 
     /**
      * Returns the string representation of the task to be stored in the storage file.
-     * 
+     *
      * @return
      */
-    abstract public String toStorageString();
+    public abstract String toStorageString();
 }

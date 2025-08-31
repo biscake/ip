@@ -1,5 +1,7 @@
 package sylvie.storage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -7,7 +9,6 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +20,7 @@ class StorageTest {
     private Storage storage;
 
     class StubToDo extends sylvie.task.Task {
-        String description;
+        private String description;
 
         public StubToDo(String description) throws InvalidArgumentException {
             super(description);
@@ -58,7 +59,7 @@ class StorageTest {
     }
 
     @Test
-    public void add_ToDoTask_success() throws IOException, InvalidArgumentException {
+    public void add_toDoTask_success() throws IOException, InvalidArgumentException {
         Task todo = new StubToDo("Test task");
         storage.add(todo);
         List<String> lines = storage.load();
@@ -67,7 +68,7 @@ class StorageTest {
     }
 
     @Test
-    public void remove_ToDoTask_success() throws IOException, InvalidArgumentException {
+    public void remove_toDoTask_success() throws IOException, InvalidArgumentException {
         Task todo1 = new StubToDo("Task 1");
         Task todo2 = new StubToDo("Task 2");
         storage.add(todo1);
@@ -81,7 +82,7 @@ class StorageTest {
     }
 
     @Test
-    public void updateDoneStatus_ToDoTask_success() throws IOException, InvalidArgumentException {
+    public void updateDoneStatus_toDoTask_success() throws IOException, InvalidArgumentException {
         Task todo = new StubToDo("Done task");
         storage.add(todo);
 
