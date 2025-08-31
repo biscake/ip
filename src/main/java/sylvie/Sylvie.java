@@ -1,5 +1,7 @@
 package sylvie;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 import sylvie.command.Command;
@@ -15,7 +17,8 @@ public class Sylvie {
     }
 
     public void run() {
-        TaskList taskList = new TaskList();
+        Path savePath = Paths.get("data", "sylvie.txt");
+        TaskList taskList = new TaskList(savePath);
         taskList.loadFromStorage();
         
         try (Scanner scanner = new Scanner(System.in)) {
@@ -40,11 +43,7 @@ public class Sylvie {
 
     public static void main(String[] args) {
         Sylvie sylvie = new Sylvie();
-        try {
-            sylvie.run();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        sylvie.run();
         System.exit(0);
     }
 }

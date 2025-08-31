@@ -10,19 +10,25 @@ import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+
 import sylvie.task.Task;
 import sylvie.ui.Textbox;
 
 public class Storage {
-    private final static Path path = Paths.get("data", "sylvie.txt");
+    private final Path path;
 
+    public Storage(Path path) {
+        this.path = path;
+    }
+        
+    
     /**
      * load Sylvie data from filepath
      * 
      * @return List of line of data stored
      * @throws IOException
      */
-    public static List<String> load() throws IOException {
+    public List<String> load() throws IOException {
         List<String> lines = new ArrayList<>();
         Files.createDirectories(path.getParent());
         if (!Files.exists(path)) {
@@ -40,7 +46,7 @@ public class Storage {
         return lines;
     }
 
-    public static void add(Task task) {
+    public void add(Task task) {
         try (BufferedWriter writer = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
             writer.write(task.toStorageString());
             writer.newLine();
@@ -49,9 +55,9 @@ public class Storage {
         }
     }
     
-    public static void remove(Task task) {
+    public void remove(Task task) {
         try {
-            Path tempPath = Paths.get("data", "temp.txt");
+            Path tempPath = this.path.getParent().resolve("temp.txt");
             Files.createDirectories(tempPath.getParent());
             Files.deleteIfExists(tempPath);
             Files.createFile(tempPath);
@@ -78,7 +84,7 @@ public class Storage {
         }
     }
     
-    public static void updateDoneStatus(Task task, boolean isDone) {
+    public void updateDoneStatus(Task task, boolean isDone) {
         try {
             Path tempPath = Paths.get("data", "temp.txt");
             Files.createDirectories(tempPath.getParent());

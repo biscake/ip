@@ -1,8 +1,10 @@
 package sylvie.task;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+
 import sylvie.exception.IllegalDataException;
 import sylvie.storage.Storage;
 import sylvie.storage.parser.Parser;
@@ -10,6 +12,11 @@ import sylvie.ui.Textbox;
 
 public class TaskList {
     private final List<Task> TASKLIST = new ArrayList<>();
+    private final Storage Storage;
+
+    public TaskList(Path path) {
+        this.Storage = new Storage(path);
+    }
 
     public Task get(int idx) {
         return this.TASKLIST.get(idx);
