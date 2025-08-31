@@ -40,7 +40,11 @@ public class Sylvie {
 
     public static void main(String[] args) {
         Sylvie sylvie = new Sylvie();
-        sylvie.run();
+        try {
+            sylvie.run();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.exit(0);
     }
 }
