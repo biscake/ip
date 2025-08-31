@@ -38,5 +38,4 @@ shadowJar {
 
 run{
     standardInput = System.in
-    ignoreExitValue = true
 }
