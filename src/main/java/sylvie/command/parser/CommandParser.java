@@ -9,6 +9,7 @@ import sylvie.command.ExitCommand;
 import sylvie.command.ListCommand;
 import sylvie.command.MarkDoneCommand;
 import sylvie.command.MarkNotDoneCommand;
+import sylvie.exception.InvalidCommandException;
 
 public class CommandParser {
     /**
@@ -17,7 +18,7 @@ public class CommandParser {
      * @param input The user's input
      * @return Command specified by the first word of input
      */
-    public static Command parse(String input) {
+    public static Command parse(String input) throws InvalidCommandException {
             String[] parts = input.split("\\s+", 2);
             String command = parts.length > 0 ? parts[0].toLowerCase() : "";
             String rest = parts.length > 1 ? parts[1] : "";
@@ -47,7 +48,7 @@ public class CommandParser {
                 case "bye" -> {
                     return new ExitCommand();
             }
-                default -> throw new IllegalArgumentException("Sorry! I don't understand what you mean.");
+                default -> throw new InvalidCommandException("Sorry! I don't understand what you mean.");
             }
     }
 }
