@@ -9,16 +9,15 @@ import sylvie.task.TaskList;
 import sylvie.ui.Textbox;
 
 public class Sylvie {
-    private static final TaskList taskList = new TaskList();
-
     private static void greet() {
         String text = "Hello! I'm Sylvie\nWhat can I do for you?";
         new Textbox(text).print();
     }
 
-    public static void main(String[] args) {
+    public void run() {
+        TaskList taskList = new TaskList();
         taskList.loadFromStorage();
-
+        
         try (Scanner scanner = new Scanner(System.in)) {
             greet();
 
@@ -37,7 +36,11 @@ public class Sylvie {
                 }
             }
         }
+    }
 
+    public static void main(String[] args) {
+        Sylvie sylvie = new Sylvie();
+        sylvie.run();
         System.exit(0);
     }
 }
