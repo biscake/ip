@@ -6,6 +6,7 @@ import sylvie.command.AddTodoCommand;
 import sylvie.command.Command;
 import sylvie.command.DeleteCommand;
 import sylvie.command.ExitCommand;
+import sylvie.command.FindCommand;
 import sylvie.command.ListCommand;
 import sylvie.command.MarkDoneCommand;
 import sylvie.command.MarkNotDoneCommand;
@@ -50,6 +51,9 @@ public class CommandParser {
         }
         case "bye" -> {
             return new ExitCommand();
+        }
+        case "find" -> {
+            return new FindCommand(rest);
         }
         default -> throw new InvalidCommandException("Sorry! I don't understand what you mean.");
         }

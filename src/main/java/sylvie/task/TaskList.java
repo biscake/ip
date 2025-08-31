@@ -115,4 +115,21 @@ public class TaskList {
         storage.updateDoneStatus(task, false);
         task.markNotDone();
     }
+
+    /**
+     * Returns a list of task with the specified keyword.
+     * @param keyword the keyword to find task
+     * @return list of filtered task
+     */
+    public List<Task> find(String keyword) {
+        List<Task> filtered = new ArrayList<>();
+
+        for (Task task : taskList) {
+            if (task.getDescription().contains(keyword)) {
+                filtered.add(task);
+            }
+        }
+
+        return filtered;
+    }
 }
