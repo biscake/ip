@@ -9,7 +9,7 @@ public class DeleteCommand extends Command {
     private final String rest;
 
     /**
-     * Create a Delete command that deletes a task from Task list
+     * Creates a Delete command that deletes a task from Task list.
      * 
      * @param rest Rest of the user's input after the "delete" command
      */
@@ -18,7 +18,7 @@ public class DeleteCommand extends Command {
     }
     
     /**
-     * Deletes a task from the task list
+     * Deletes a task from the task list.
      * 
      * @param taskList List of Task
      * @throws InvalidArgumentException if ID of task to be deleted is invalid

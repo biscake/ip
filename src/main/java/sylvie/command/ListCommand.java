@@ -5,7 +5,9 @@ import sylvie.ui.Textbox;
 
 public class ListCommand extends Command {
     /**
-     * Prints a list of all current tasks
+     * Executes the list command by displaying all tasks in the task list.
+     * 
+     * @param taskList List of Task
      */
     @Override
     public void execute(TaskList taskList) {

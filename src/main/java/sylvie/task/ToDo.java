@@ -4,7 +4,7 @@ import sylvie.exception.InvalidArgumentException;
 
 public class ToDo extends Task {
     /**
-     * Create a Todo task
+     * Creates a Todo task.
      * 
      * @param description Description of the task
      */

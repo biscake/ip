@@ -20,10 +20,9 @@ public class Storage {
     public Storage(Path path) {
         this.path = path;
     }
-        
     
     /**
-     * load Sylvie data from filepath
+     * Loads Sylvie data from filepath.
      * 
      * @return List of line of data stored
      * @throws IOException
@@ -46,6 +45,11 @@ public class Storage {
         return lines;
     }
 
+    /**
+     * Saves a task to the storage file.
+     * 
+     * @param task the task to be saved
+     */
     public void add(Task task) {
         try (BufferedWriter writer = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
             writer.write(task.toStorageString());
@@ -55,6 +59,11 @@ public class Storage {
         }
     }
     
+    /**
+     * Removes a task from the storage file.
+     * 
+     * @param task the task to be removed
+     */
     public void remove(Task task) {
         try {
             Path tempPath = this.path.getParent().resolve("temp.txt");
@@ -84,6 +93,12 @@ public class Storage {
         }
     }
     
+    /**
+     * Updates the done status of a task in the storage file.
+     * 
+     * @param task the task to be updated
+     * @param isDone the new done status of the task
+     */
     public void updateDoneStatus(Task task, boolean isDone) {
         try {
             Path tempPath = Paths.get("data", "temp.txt");

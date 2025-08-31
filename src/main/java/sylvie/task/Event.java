@@ -1,6 +1,7 @@
 package sylvie.task;
 
 import java.time.temporal.Temporal;
+
 import sylvie.exception.InvalidArgumentException;
 import sylvie.time.Date;
 
@@ -9,7 +10,7 @@ public class Event extends Task {
     Temporal to;
 
     /**
-     * Create a Event task 
+     * Creates an Event task.
      * 
      * @param description description of the task
      * @param from Start time of the event

@@ -5,7 +5,9 @@ import sylvie.ui.Textbox;
 
 public class ExitCommand extends Command {
     /**
-     * Prints exit message
+     * Executes the exit command by displaying a goodbye message.
+     * 
+     * @param taskList List of Task (not used in this command)
      */
     @Override
     public void execute(TaskList taskList) {

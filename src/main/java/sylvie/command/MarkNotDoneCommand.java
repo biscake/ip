@@ -8,7 +8,7 @@ public class MarkNotDoneCommand extends Command {
     private final String rest;
 
     /**
-     * Create a mark not done command
+     * Creates a mark not done command.
      * 
      * @param rest Rest of the user's input after "unmark" command
      */
@@ -17,7 +17,7 @@ public class MarkNotDoneCommand extends Command {
     }
 
     /**
-     * Marks the task specified by a ID as not done
+     * Marks the task specified by a ID as not done.
      * 
      * @param taskList List of task
      */

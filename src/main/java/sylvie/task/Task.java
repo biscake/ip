@@ -41,5 +41,10 @@ public abstract class Task {
         return sb.toString();
     }
 
+    /**
+     * Returns the string representation of the task to be stored in the storage file.
+     * 
+     * @return
+     */
     abstract public String toStorageString();
 }

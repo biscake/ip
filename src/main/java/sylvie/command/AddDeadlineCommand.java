@@ -8,7 +8,7 @@ public class AddDeadlineCommand extends AddTaskCommand {
     private final String rest;
 
     /**
-     * Creates a command that adds a Deadline task
+     * Creates a command that adds a Deadline task.
      * 
      * @param rest the string after the "deadline" commmand word, representing
      *             the description, and by (/by) deadline of the Deadline Task
@@ -18,11 +18,10 @@ public class AddDeadlineCommand extends AddTaskCommand {
     }
 
     /**
-     * Adds a Deadline task to the task list
+     * Adds a Deadline task to the task list.
      * 
      * @param taskList List of Task
-     * @throws InvalidArgumentException if description is blank or missing /by or
-     *         by is blank
+     * @throws InvalidArgumentException if description is blank, missing /by or blank /by
      */
     @Override
     public void execute(TaskList taskList) throws InvalidArgumentException {

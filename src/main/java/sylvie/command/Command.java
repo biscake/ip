@@ -7,7 +7,9 @@ public abstract class Command {
     abstract public void execute(TaskList taskList) throws InvalidArgumentException;
 
     /**
-     * @return Returns whether should the command exit the chatbot
+     * Returns if the command is an exit command.
+     * 
+     * @return false as default
      */
     public boolean isExit() {
         return false;

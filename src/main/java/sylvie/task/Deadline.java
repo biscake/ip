@@ -1,6 +1,7 @@
 package sylvie.task;
 
 import java.time.temporal.Temporal;
+
 import sylvie.exception.InvalidArgumentException;
 import sylvie.time.Date;
 
@@ -8,7 +9,7 @@ public class Deadline extends Task {
     Temporal by;
 
     /**
-     * Create a Deadline Task 
+     * Creates a Deadline Task.
      * 
      * @param description description of task
      * @param by deadline of the task

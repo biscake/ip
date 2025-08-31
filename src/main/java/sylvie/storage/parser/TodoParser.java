@@ -6,6 +6,14 @@ import sylvie.task.Task;
 import sylvie.task.ToDo;
 
 public class TodoParser extends TaskParser {
+    /**
+     * Parses a string input to create a ToDo task.
+     * The input format is expected to be "description".
+     * 
+     * @param input the string input containing the task details
+     * @return a ToDo task created from the input details
+     * @throws IllegalDataException if the input data is invalid
+     */ 
     @Override
     public Task parse(String input) throws IllegalDataException {
         try {

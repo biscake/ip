@@ -6,6 +6,14 @@ import sylvie.task.Event;
 import sylvie.task.Task;
 
 public class EventParser extends TaskParser {
+    /**
+     * Parses a string input to create an Event task.
+     * The input format is expected to be "description ^ from ^ to".
+     * 
+     * @param input the string input containing the task details
+     * @return an Event task created from the input details
+     * @throws IllegalDataException if the input data is invalid
+     */
     @Override
     public Task parse(String input) throws IllegalDataException {
         String[] parts = input.split("\\^");

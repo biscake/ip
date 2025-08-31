@@ -16,7 +16,7 @@ public class Sylvie {
         new Textbox(text).print();
     }
 
-    public void run() {
+    private void run() {
         Path savePath = Paths.get("data", "sylvie.txt");
         TaskList taskList = new TaskList(savePath);
         taskList.loadFromStorage();

@@ -9,7 +9,7 @@ public class AddTodoCommand extends AddTaskCommand {
     private final String rest;
 
     /**
-     * Creates a command that adds a Todo task
+     * Creates a command that adds a Todo task.
      * 
      * @param rest the string after the "todo" commmand word, representing the description
      */
@@ -18,7 +18,7 @@ public class AddTodoCommand extends AddTaskCommand {
     }
 
     /**
-     * Adds a Todo task to the task list
+     * Adds a Todo task to the task list.
      * 
      * @param taskList List of Task
      * @throws InvalidArgumentException if description is blank

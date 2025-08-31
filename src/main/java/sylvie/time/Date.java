@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.Temporal;
 import java.util.List;
+
 import sylvie.exception.InvalidArgumentException;
 
 public class Date {
@@ -16,6 +17,13 @@ public class Date {
         DateTimeFormatter.ofPattern("ddMMyy HHmm")
     );
 
+    /**
+     * Parses a date string into a Temporal object (LocalDate or LocalDateTime).
+     * Supports multiple date formats.
+     * @param input the date string to parse
+     * @return a Temporal object representing the parsed date
+     * @throws InvalidArgumentException if the date format is invalid
+     */
     public static Temporal parse(String input) throws InvalidArgumentException {
         for (DateTimeFormatter formatter : FORMATTERS) {
             try {
@@ -37,6 +45,12 @@ public class Date {
         throw new InvalidArgumentException(errorMessage.toString());
     }
     
+    /**
+     * Converts a Temporal object (LocalDate or LocalDateTime) to a formatted date string.
+     * @param date the Temporal object to format
+     * @return a formatted date string
+     * @throws InvalidArgumentException if the Temporal type is unsupported
+     */
     public static String toDateString(Temporal date) throws InvalidArgumentException {
         if (date instanceof LocalDate localDate) {
             return localDate.format(DateTimeFormatter.ofPattern("d MMM yyyy"));

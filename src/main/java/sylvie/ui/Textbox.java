@@ -7,8 +7,8 @@ public class Textbox {
         this.message = message;
     }
 
-    /**
-     * Prints the message inside a border.
+    /**     
+     * * Prints the message in a textbox format with borders and indentation.
      */
     public void print() {
         int INDENT_SIZE = 4;
@@ -27,12 +27,6 @@ public class Textbox {
         printBorder(maxWidth, INDENT_SIZE);
     }
 
-    /**
-     * Prints a border of underscores with the specified indentation size.
-     * 
-     * @param width width of the length of the border to print.
-     * @param indentSize the number of spaces to indent before the border.
-     */
     private void printBorder(int width, int indentSize) {
         StringBuilder sb = new StringBuilder();
 
@@ -46,12 +40,6 @@ public class Textbox {
         System.out.println(sb);
     }
 
-    /**
-     * Helper function that returns string of whitespace
-     * 
-     * @param size Length of the indentation
-     * @return String of whitespaces of indentation size
-     */
     private String indent(int size) {
         StringBuilder sb = new StringBuilder();
 

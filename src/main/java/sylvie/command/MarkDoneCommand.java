@@ -9,7 +9,7 @@ public class MarkDoneCommand extends Command {
     private final String rest;
 
     /**
-     * Create a mark done command
+     * Creates a mark done command.
      * 
      * @param rest Rest of the user's input after "mark" command
      */
@@ -18,7 +18,7 @@ public class MarkDoneCommand extends Command {
     }
 
     /**
-     * Marks the task specified by a ID as done
+     * Marks the task specified by a ID as done.
      * 
      * @param taskList List of task
      */
