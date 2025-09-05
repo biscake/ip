@@ -14,25 +14,27 @@ import sylvie.ui.Textbox;
  * Main class for the Sylvie chatbot application.
  */
 public class Sylvie {
-    private static void greet() {
-        String text = "Hello! I'm Sylvie\nWhat can I do for you?";
-        new Textbox(text).print();
+    private final TaskList taskList;
+
+    public Sylvie(String fileName) {
+        Path savePath = Paths.get("data", fileName);
+        taskList = new TaskList(savePath);
+        taskList.loadFromStorage();
     }
 
-    private void run() {
-        Path savePath = Paths.get("data", "sylvie.txt");
-        TaskList taskList = new TaskList(savePath);
-        taskList.loadFromStorage();
+    public static String greet() {
+        return "Hello! I'm Sylvie\nWhat can I do for you?";
+    }
 
+    private void listen() {
         try (Scanner scanner = new Scanner(System.in)) {
-            greet();
-
             while (true) {
                 try {
                     String line = scanner.nextLine();
 
                     Command command = CommandParser.parse(line);
-                    command.execute(taskList);
+                    String response = command.execute(taskList);
+                    new Textbox(response).print();
 
                     if (command.isExit()) {
                         break;
@@ -44,9 +46,12 @@ public class Sylvie {
         }
     }
 
-    public static void main(String[] args) {
-        Sylvie sylvie = new Sylvie();
-        sylvie.run();
-        System.exit(0);
+    public String getResponse(String input) {
+        try {
+            Command command = CommandParser.parse(input);
+            return command.execute(taskList);
+        } catch (SylvieException e) {
+            return "Sorry I don't quite understand what you mean";
+        }
     }
 }
