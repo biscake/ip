@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
      * @throws InvalidArgumentException if ID of task to be deleted is invalid
      */
     @Override
-    public void execute(TaskList taskList) throws InvalidArgumentException {
+    public String execute(TaskList taskList) throws InvalidArgumentException {
         try {
             int index = Integer.parseInt(rest) - 1; // -1 since ArrayList is 0-indexed
             if (index < 0 || index >= taskList.size()) {
@@ -35,10 +35,10 @@ public class DeleteCommand extends Command {
             }
 
             Task task = taskList.delete(index);
-            new Textbox(String
+
+            return String
                     .format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.", task,
-                            taskList.size())
-                ).print();
+                            taskList.size());
         } catch (NumberFormatException e) {
             throw new InvalidArgumentException("Invalid ID");
         }

@@ -13,7 +13,7 @@ public class AddDeadlineCommand extends AddTaskCommand {
     /**
      * Creates a command that adds a Deadline task.
      *
-     * @param rest the string after the "deadline" commmand word, representing
+     * @param rest the string after the "deadline" command word, representing
      *             the description, and by (/by) deadline of the Deadline Task
      */
     public AddDeadlineCommand(String rest) {
@@ -23,11 +23,10 @@ public class AddDeadlineCommand extends AddTaskCommand {
     /**
      * Adds a Deadline task to the task list.
      *
-     * @param taskList List of Task
      * @throws InvalidArgumentException if description is blank, missing /by or blank /by
      */
     @Override
-    public void execute(TaskList taskList) throws InvalidArgumentException {
+    public String execute(TaskList taskList) throws InvalidArgumentException {
         int byIndex = rest.indexOf("/by");
 
         if (byIndex != -1) {
@@ -42,7 +41,7 @@ public class AddDeadlineCommand extends AddTaskCommand {
             }
 
             Task task = new Deadline(description, by);
-            super.addTask(task, taskList);
+            return super.addTask(task, taskList);
         } else {
             throw new InvalidArgumentException("By (/by) required for deadline.");
         }

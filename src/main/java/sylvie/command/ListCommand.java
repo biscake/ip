@@ -9,14 +9,11 @@ import sylvie.ui.Textbox;
 public class ListCommand extends Command {
     /**
      * Executes the list command by displaying all tasks in the task list.
-     *
-     * @param taskList List of Task
      */
     @Override
-    public void execute(TaskList taskList) {
+    public String execute(TaskList taskList) {
         if (taskList.isEmpty()) {
-            new Textbox("The list is currently empty.").print();
-            return;
+            return "The list is currently empty.";
         }
 
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
@@ -26,6 +23,6 @@ public class ListCommand extends Command {
             sb.append(index).append(taskList.get(i)).append("\n");
         }
 
-        new Textbox(sb.toString()).print();
+        return sb.toString();
     }
 }

@@ -21,11 +21,9 @@ public class MarkNotDoneCommand extends Command {
 
     /**
      * Marks the task specified by a ID as not done.
-     *
-     * @param taskList List of task
      */
     @Override
-    public void execute(TaskList taskList) throws InvalidArgumentException {
+    public String execute(TaskList taskList) throws InvalidArgumentException {
         try {
             int index = Integer.parseInt(rest) - 1; // -1 since ArrayList is 0-indexed
             if (index < 0 || index >= taskList.size()) {
@@ -34,7 +32,7 @@ public class MarkNotDoneCommand extends Command {
 
             Task task = taskList.get(index);
             taskList.markTaskNotDone(index);
-            new Textbox(String.format("Okay! I've marked this task as not done yet:\n%s", task)).print();
+            return String.format("Okay! I've marked this task as not done yet:\n%s", task);
         } catch (NumberFormatException e) {
             throw new InvalidArgumentException("Invalid ID");
         }

@@ -7,7 +7,11 @@ import sylvie.task.TaskList;
  * Abstract class representing a command in the Sylvie application.
  */
 public abstract class Command {
-    public abstract void execute(TaskList taskList) throws InvalidArgumentException;
+    /**
+     * @param taskList List of task
+     * @return response message of command
+     */
+    public abstract String execute(TaskList taskList) throws InvalidArgumentException;
 
     /**
      * Returns if the command is an exit command.

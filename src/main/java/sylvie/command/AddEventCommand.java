@@ -24,12 +24,11 @@ public class AddEventCommand extends AddTaskCommand {
     /**
      * Adds a Event task to the task list.
      *
-     * @param taskList List of Task
      * @throws InvalidArgumentException if description is blank, missing /from or /to,
      *         blank /from or /to
      */
     @Override
-    public void execute(TaskList taskList) throws InvalidArgumentException {
+    public String execute(TaskList taskList) throws InvalidArgumentException {
         int fromIndex = rest.indexOf("/from");
         int toIndex = rest.indexOf("/to");
 
@@ -51,7 +50,7 @@ public class AddEventCommand extends AddTaskCommand {
             }
 
             Task task = new Event(description, from, to);
-            super.addTask(task, taskList);
+            return super.addTask(task, taskList);
         } else {
             throw new InvalidArgumentException("From (/from) and To (/to) required for event");
         }

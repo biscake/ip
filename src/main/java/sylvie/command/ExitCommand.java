@@ -9,13 +9,10 @@ import sylvie.ui.Textbox;
 public class ExitCommand extends Command {
     /**
      * Executes the exit command by displaying a goodbye message.
-     *
-     * @param taskList List of Task (not used in this command)
      */
     @Override
-    public void execute(TaskList taskList) {
-        String text = "Bye bye! Hope to see you again soon!";
-        new Textbox(text).print();
+    public String execute(TaskList taskList) {
+        return "Bye bye! Hope to see you again soon!";
     }
 
     /**

@@ -23,16 +23,15 @@ public class AddTodoCommand extends AddTaskCommand {
     /**
      * Adds a Todo task to the task list.
      *
-     * @param taskList List of Task
      * @throws InvalidArgumentException if description is blank
      */
     @Override
-    public void execute(TaskList taskList) throws InvalidArgumentException {
+    public String execute(TaskList taskList) throws InvalidArgumentException {
         if (rest.isBlank()) {
             throw new InvalidArgumentException("Description of a todo cannot be empty.");
         }
 
         Task task = new ToDo(rest);
-        super.addTask(task, taskList);
+        return super.addTask(task, taskList);
     }
 }

@@ -23,16 +23,13 @@ public class FindCommand extends Command {
 
     /**
      * Find task with keyword from the task list.
-     *
-     * @param taskList List of Task
      */
     @Override
-    public void execute(TaskList taskList) {
+    public String execute(TaskList taskList) {
         List<Task> filtered = taskList.find(keyword);
 
         if (filtered.isEmpty()) {
-            new Textbox("There are no task with the keyword: " + keyword).print();
-            return;
+            return "There are no task with the keyword: " + keyword;
         }
 
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
@@ -42,6 +39,6 @@ public class FindCommand extends Command {
             sb.append(index).append(filtered.get(i)).append("\n");
         }
 
-        new Textbox(sb.toString()).print();
+        return sb.toString();
     }
 }
