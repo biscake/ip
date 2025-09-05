@@ -1,5 +1,6 @@
 package sylvie.ui;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.Collections;
 
@@ -13,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 
 /**
  * Represents a dialog box consisting of an ImageView to represent the speaker's face
@@ -23,6 +26,10 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+    @FXML
+    private HBox textBoxContainer;
+    @FXML
+    private HBox imageContainer;
 
     private DialogBox(String text, Image img) {
         try {
@@ -38,23 +45,37 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
+    @FXML
+    public void initialize() {
+        Rectangle clip = new Rectangle(displayPicture.getFitHeight(), displayPicture.getFitHeight());
+        clip.setArcHeight(90);
+        clip.setArcWidth(90);
+        displayPicture.setClip(clip);
+    }
+
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        ObservableList<Node> tmp = FXCollections.observableArrayList(this.textBoxContainer.getChildren());
         Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        this.textBoxContainer.getChildren().setAll(tmp);
+        tmp = FXCollections.observableArrayList(this.imageContainer.getChildren());
+        Collections.reverse(tmp);
+        this.imageContainer.getChildren().setAll(tmp);
+        this.textBoxContainer.setAlignment(Pos.TOP_RIGHT);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.dialog.getStyleClass().add("user-dialog");
+        db.flip();
+        return db;
     }
 
     public static DialogBox getSylvieDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.flip();
+        db.dialog.getStyleClass().add("sylvie-dialog");
         return db;
     }
 }
