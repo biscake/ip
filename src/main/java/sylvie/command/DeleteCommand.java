@@ -8,15 +8,15 @@ import sylvie.task.TaskList;
  * Command to delete a task from the task list.
  */
 public class DeleteCommand extends Command {
-    private final String rest;
+    private final String commandArgs;
 
     /**
      * Creates a Delete command that deletes a task from Task list.
      *
-     * @param rest Rest of the user's input after the "delete" command
+     * @param commandArgs Rest of the user's input after the "delete" command
      */
-    public DeleteCommand(String rest) {
-        this.rest = rest;
+    public DeleteCommand(String commandArgs) {
+        this.commandArgs = commandArgs;
     }
 
     /**
@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList taskList) throws InvalidArgumentException {
         try {
-            int index = Integer.parseInt(rest) - 1; // -1 since ArrayList is 0-indexed
+            int index = Integer.parseInt(commandArgs) - 1; // -1 since ArrayList is 0-indexed
             if (index < 0 || index >= taskList.size()) {
                 throw new InvalidArgumentException("Invalid ID");
             }

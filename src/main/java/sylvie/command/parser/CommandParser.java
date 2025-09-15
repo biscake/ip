@@ -26,35 +26,35 @@ public class CommandParser {
         String[] parts = input.split("\\s+", 2);
         assert parts.length == 3 : "Input should contains 2 parts";
         String command = parts.length > 0 ? parts[0].toLowerCase() : "";
-        String rest = parts.length > 1 ? parts[1] : "";
+        String commandArgs = parts.length > 1 ? parts[1] : "";
 
         switch (command) {
         case "todo" -> {
-            return new AddTodoCommand(rest);
+            return new AddTodoCommand(commandArgs);
         }
         case "deadline" -> {
-            return new AddDeadlineCommand(rest);
+            return new AddDeadlineCommand(commandArgs);
         }
         case "event" -> {
-            return new AddEventCommand(rest);
+            return new AddEventCommand(commandArgs);
         }
         case "mark" -> {
-            return new MarkDoneCommand(rest);
+            return new MarkDoneCommand(commandArgs);
         }
         case "unmark" -> {
-            return new MarkNotDoneCommand(rest);
+            return new MarkNotDoneCommand(commandArgs);
         }
         case "list" -> {
             return new ListCommand();
         }
         case "delete" -> {
-            return new DeleteCommand(rest);
+            return new DeleteCommand(commandArgs);
         }
         case "bye" -> {
             return new ExitCommand();
         }
         case "find" -> {
-            return new FindCommand(rest);
+            return new FindCommand(commandArgs);
         }
         default -> throw new InvalidCommandException("Sorry! I don't understand what you mean.");
         }

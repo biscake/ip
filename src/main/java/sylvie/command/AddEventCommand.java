@@ -9,16 +9,16 @@ import sylvie.task.TaskList;
  * Command to add a Event task to the task list.
  */
 public class AddEventCommand extends AddTaskCommand {
-    private final String rest;
+    private final String commandArgs;
 
     /**
      * Creates a command that adds a Event task.
      *
-     * @param rest the string after the "event" commmand word, representing
+     * @param commandArgs the string after the "event" command word, representing
      *             the description, from (/from) and to (/to) of the event Task
      */
-    public AddEventCommand(String rest) {
-        this.rest = rest;
+    public AddEventCommand(String commandArgs) {
+        this.commandArgs = commandArgs;
     }
 
     /**
@@ -29,11 +29,11 @@ public class AddEventCommand extends AddTaskCommand {
      */
     @Override
     public String execute(TaskList taskList) throws InvalidArgumentException {
-        int fromIndex = rest.indexOf("/from");
-        int toIndex = rest.indexOf("/to");
+        int fromIndex = commandArgs.indexOf("/from");
+        int toIndex = commandArgs.indexOf("/to");
 
         if (fromIndex != -1 && toIndex != -1) {
-            String description = rest.substring(0, Math.min(fromIndex, toIndex)).trim();
+            String description = commandArgs.substring(0, Math.min(fromIndex, toIndex)).trim();
             String from;
             String to;
 
@@ -42,11 +42,11 @@ public class AddEventCommand extends AddTaskCommand {
             }
 
             if (fromIndex < toIndex) {
-                from = rest.substring(fromIndex + 5, toIndex).trim();
-                to = rest.substring(toIndex + 3).trim();
+                from = commandArgs.substring(fromIndex + 5, toIndex).trim();
+                to = commandArgs.substring(toIndex + 3).trim();
             } else {
-                from = rest.substring(fromIndex + 5).trim();
-                to = rest.substring(toIndex + 3, fromIndex).trim();
+                from = commandArgs.substring(fromIndex + 5).trim();
+                to = commandArgs.substring(toIndex + 3, fromIndex).trim();
             }
 
             Task task = new Event(description, from, to);

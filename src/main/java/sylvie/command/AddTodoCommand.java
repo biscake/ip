@@ -9,15 +9,15 @@ import sylvie.task.ToDo;
  * Command to add a Todo task to the task list.
  */
 public class AddTodoCommand extends AddTaskCommand {
-    private final String rest;
+    private final String commandArgs;
 
     /**
      * Creates a command that adds a Todo task.
      *
-     * @param rest the string after the "todo" commmand word, representing the description
+     * @param commandArgs the string after the "todo" command word, representing the description
      */
-    public AddTodoCommand(String rest) {
-        this.rest = rest;
+    public AddTodoCommand(String commandArgs) {
+        this.commandArgs = commandArgs;
     }
 
     /**
@@ -27,11 +27,11 @@ public class AddTodoCommand extends AddTaskCommand {
      */
     @Override
     public String execute(TaskList taskList) throws InvalidArgumentException {
-        if (rest.isBlank()) {
+        if (commandArgs.isBlank()) {
             throw new InvalidArgumentException("Description of a todo cannot be empty.");
         }
 
-        Task task = new ToDo(rest);
+        Task task = new ToDo(commandArgs);
         return super.addTask(task, taskList);
     }
 }

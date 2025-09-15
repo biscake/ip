@@ -8,16 +8,16 @@ import sylvie.task.TaskList;
  * Command to add a Deadline task to the task list.
  */
 public class AddDeadlineCommand extends AddTaskCommand {
-    private final String rest;
+    private final String commandArgs;
 
     /**
      * Creates a command that adds a Deadline task.
      *
-     * @param rest the string after the "deadline" command word, representing
+     * @param commandArgs the string after the "deadline" command word, representing
      *             the description, and by (/by) deadline of the Deadline Task
      */
-    public AddDeadlineCommand(String rest) {
-        this.rest = rest;
+    public AddDeadlineCommand(String commandArgs) {
+        this.commandArgs = commandArgs;
     }
 
     /**
@@ -27,15 +27,15 @@ public class AddDeadlineCommand extends AddTaskCommand {
      */
     @Override
     public String execute(TaskList taskList) throws InvalidArgumentException {
-        int byIndex = rest.indexOf("/by");
+        int byIndex = commandArgs.indexOf("/by");
 
         if (byIndex != -1) {
-            String description = rest.substring(0, byIndex).trim();
+            String description = commandArgs.substring(0, byIndex).trim();
             if (description.isBlank()) {
                 throw new InvalidArgumentException("Description of a deadline cannot be empty.");
             }
 
-            String by = rest.substring(byIndex + 3).trim();
+            String by = commandArgs.substring(byIndex + 3).trim();
             if (by.isBlank()) {
                 throw new InvalidArgumentException("Deadline (/by) cannot be empty.");
             }

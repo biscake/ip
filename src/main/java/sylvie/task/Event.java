@@ -34,7 +34,7 @@ public class Event extends Task {
             this.from = Date.parse(from);
             this.to = Date.parse(to);
         } catch (InvalidArgumentException e) {
-            throw new InvalidArgumentException("Invalid deadline format (yyyy-MM-dd HHmm)");
+            throw new InvalidArgumentException("Invalid deadline format");
         }
     }
 

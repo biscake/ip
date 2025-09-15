@@ -27,7 +27,7 @@ public class Deadline extends Task {
         try {
             this.by = Date.parse(by);
         } catch (InvalidArgumentException e) {
-            throw new InvalidArgumentException("Invalid deadline format (yyyy-MM-dd HHmm)");
+            throw new InvalidArgumentException("Invalid deadline format");
         }
     }
 
