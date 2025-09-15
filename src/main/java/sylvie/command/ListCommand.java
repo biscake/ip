@@ -1,7 +1,6 @@
 package sylvie.command;
 
 import sylvie.task.TaskList;
-import sylvie.ui.Textbox;
 
 /**
  * Command to list all tasks in the task list.

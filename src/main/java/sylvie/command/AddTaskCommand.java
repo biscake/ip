@@ -2,7 +2,6 @@ package sylvie.command;
 
 import sylvie.task.Task;
 import sylvie.task.TaskList;
-import sylvie.ui.Textbox;
 
 /**
  * Abstract command to add a task to the task list.

@@ -35,7 +35,9 @@ public class TaskList {
      * @param task the task to be added
      */
     public void add(Task task) {
+        int oldSize = this.taskList.size();
         this.taskList.add(task);
+        assert taskList.size() == oldSize + 1 : "TaskList size should increase by 1 after add";
         storage.add(task);
     }
 
@@ -45,9 +47,11 @@ public class TaskList {
      * @return the deleted task
      */
     public Task delete(int idx) {
+        int oldSize = taskList.size();
         Task task = taskList.get(idx);
         storage.remove(task);
         this.taskList.remove(idx);
+        assert taskList.size() == oldSize - 1 : "TaskList size should decrease by 1 after delete";
 
         return task;
     }
@@ -103,6 +107,7 @@ public class TaskList {
         Task task = taskList.get(idx);
         storage.updateDoneStatus(task, true);
         task.markDone();
+        assert task.isDone : "Task should be marked as done";
     }
 
     /**
@@ -114,6 +119,7 @@ public class TaskList {
         Task task = taskList.get(idx);
         storage.updateDoneStatus(task, false);
         task.markNotDone();
+        assert !task.isDone : "Task should be marked as not done";
     }
 
     /**

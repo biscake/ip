@@ -4,7 +4,6 @@ import java.util.List;
 
 import sylvie.task.Task;
 import sylvie.task.TaskList;
-import sylvie.ui.Textbox;
 
 /**
  * Command to find task with the specified keyword in the task list.

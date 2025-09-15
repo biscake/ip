@@ -3,7 +3,6 @@ package sylvie.command;
 import sylvie.exception.InvalidArgumentException;
 import sylvie.task.Task;
 import sylvie.task.TaskList;
-import sylvie.ui.Textbox;
 
 /**
  * Command to delete a task from the task list.

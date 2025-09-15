@@ -24,6 +24,7 @@ public class CommandParser {
      */
     public static Command parse(String input) throws InvalidCommandException {
         String[] parts = input.split("\\s+", 2);
+        assert parts.length == 3 : "Input should contains 2 parts";
         String command = parts.length > 0 ? parts[0].toLowerCase() : "";
         String rest = parts.length > 1 ? parts[1] : "";
 
