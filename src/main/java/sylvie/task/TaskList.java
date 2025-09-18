@@ -1,6 +1,5 @@
 package sylvie.task;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +8,6 @@ import sylvie.exception.IllegalDataException;
 import sylvie.exception.StorageException;
 import sylvie.storage.Storage;
 import sylvie.storage.parser.Parser;
-import sylvie.ui.Textbox;
 import sylvie.task.Task.Priority;
 
 /**
@@ -69,24 +67,16 @@ public class TaskList {
     /**
      * Loads tasks from storage into the task list.
      */
-    public void loadFromStorage() {
+    public void loadFromStorage() throws StorageException, IllegalDataException {
         List<String> lines;
-        try {
-            lines = storage.load();
-            for (String line : lines) {
-                try {
-                    Task task = Parser.parse(line);
-                    if (task == null) {
-                        continue;
-                    }
-
-                    taskList.add(task);
-                } catch (IllegalDataException e) {
-                    new Textbox(e.getMessage()).print();
-                }
+        lines = storage.load();
+        for (String line : lines) {
+            Task task = Parser.parse(line);
+            if (task == null) {
+                continue;
             }
-        } catch (IOException e) {
-            new Textbox(e.getMessage()).print();
+
+            taskList.add(task);
         }
     }
 

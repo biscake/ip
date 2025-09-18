@@ -43,6 +43,9 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
+    /**
+     * Initializes the dialog box, setting up the clipping for the display picture.
+     */
     @FXML
     public void initialize() {
         Rectangle clip = new Rectangle(displayPicture.getFitHeight(), displayPicture.getFitHeight());

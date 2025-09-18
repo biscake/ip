@@ -5,15 +5,14 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.UnaryOperator;
 
 import sylvie.exception.StorageException;
 import sylvie.task.Task;
-import sylvie.ui.Textbox;
 import sylvie.task.Task.Priority;
 
 /**
@@ -32,22 +31,27 @@ public class Storage {
      * @return List of line of data stored
      * @throws IOException
      */
-    public List<String> load() throws IOException {
-        List<String> lines = new ArrayList<>();
-        Files.createDirectories(path.getParent());
-        if (!Files.exists(path)) {
-            Files.createFile(path);
-        }
-
-        try (BufferedReader reader = Files.newBufferedReader(path)) {
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                lines.add(line.trim());
+    public List<String> load() throws StorageException {
+        try {
+            List<String> lines = new ArrayList<>();
+            Files.createDirectories(path.getParent());
+            if (!Files.exists(path)) {
+                Files.createFile(path);
             }
+
+            try (BufferedReader reader = Files.newBufferedReader(path)) {
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    lines.add(line.trim());
+                }
+            }
+
+            return lines;
+        } catch (IOException e) {
+            throw new StorageException("Failed to load data from storage.");
         }
 
-        return lines;
     }
 
     /**
@@ -60,7 +64,7 @@ public class Storage {
             writer.write(task.toStorageString());
             writer.newLine();
         } catch (IOException e) {
-            throw new StorageException();
+            throw new StorageException("Failed to add task to storage.");
         }
     }
 
@@ -94,7 +98,40 @@ public class Storage {
 
             Files.move(tempPath, path, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            throw new StorageException();
+            throw new StorageException("Failed to remove task from storage.");
+        }
+    }
+
+    /**
+     * Updates a task in the storage file using the provided updater function.
+     *
+     * @param task the task to be updated
+     * @param updater a function that takes the current parts of the task line and returns the updated parts
+     * @throws StorageException if an I/O error occurs
+     */
+    private void updateTaskInFile(Task task, UnaryOperator<String[]> updater) throws StorageException {
+        try {
+            Path tempPath = Files.createTempFile(path.getParent(), "temp", ".txt");
+            try (
+                    BufferedReader reader = Files.newBufferedReader(path);
+                    BufferedWriter writer = Files.newBufferedWriter(tempPath)) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\|");
+                    for (int i = 0; i < parts.length; i++) {
+                        parts[i] = parts[i].trim();
+                    }
+                    if (line.trim().equals(task.toStorageString())) {
+                        parts = updater.apply(parts);
+                        line = String.join(" | ", parts);
+                    }
+                    writer.write(line.trim());
+                    writer.newLine();
+                }
+            }
+            Files.move(tempPath, path, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            throw new StorageException("Failed to update task in storage.");
         }
     }
 
@@ -105,71 +142,22 @@ public class Storage {
      * @param isDone the new done status of the task
      */
     public void updateDoneStatus(Task task, boolean isDone) throws StorageException {
-        try {
-            Path tempPath = Paths.get("data", "temp.txt");
-            Files.createDirectories(tempPath.getParent());
-            Files.deleteIfExists(tempPath);
-            Files.createFile(tempPath);
-
-            try (
-                    BufferedReader reader = Files.newBufferedReader(path);
-                    BufferedWriter writer = Files.newBufferedWriter(tempPath);
-            ) {
-                String line;
-
-                while ((line = reader.readLine()) != null) {
-                    if (line.trim().equals(task.toStorageString())) {
-                        String[] parts = line.split("\\|");
-                        for (int i = 0; i < parts.length; i++) {
-                            parts[i] = parts[i].trim();
-                        }
-
-                        parts[1] = isDone ? "1" : "0";
-                        line = String.join(" | ", parts);
-                    }
-                    writer.write(line.trim());
-                    writer.newLine();
-                }
-            }
-
-            Files.move(tempPath, path, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            throw new StorageException();
-        }
+        updateTaskInFile(task, parts -> {
+            parts[1] = isDone ? "1" : "0";
+            return parts;
+        });
     }
 
+    /**
+     * Updates the priority of a task in the storage file.
+     *
+     * @param task the task to be updated
+     * @param priority the new priority of the task
+     */
     public void updateTaskPriority(Task task, Priority priority) throws StorageException {
-        try {
-            Path tempPath = Paths.get("data", "temp.txt");
-            Files.createDirectories(tempPath.getParent());
-            Files.deleteIfExists(tempPath);
-            Files.createFile(tempPath);
-
-            try (
-                    BufferedReader reader = Files.newBufferedReader(path);
-                    BufferedWriter writer = Files.newBufferedWriter(tempPath);
-            ) {
-                String line;
-
-                while ((line = reader.readLine()) != null) {
-                    System.out.println(task.toStorageString());
-                    if (line.trim().equals(task.toStorageString())) {
-                        String[] parts = line.split("\\|");
-                        for (int i = 0; i < parts.length; i++) {
-                            parts[i] = parts[i].trim();
-                        }
-
-                        parts[2] = String.valueOf(priority.ordinal());
-                        line = String.join(" | ", parts);
-                    }
-                    writer.write(line.trim());
-                    writer.newLine();
-                }
-            }
-
-            Files.move(tempPath, path, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            throw new StorageException();
-        }
+        updateTaskInFile(task, parts -> {
+            parts[2] = String.valueOf(priority.ordinal());
+            return parts;
+        });
     }
 }

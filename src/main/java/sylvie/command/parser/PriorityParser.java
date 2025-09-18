@@ -3,6 +3,9 @@ package sylvie.command.parser;
 import sylvie.exception.InvalidArgumentException;
 import sylvie.task.Task.Priority;
 
+/**
+ * Parses priority from user input.
+ */
 public class PriorityParser {
     /**
      * Parses Task.Priority given an input string.
@@ -14,16 +17,16 @@ public class PriorityParser {
         String lowerStr = input.toLowerCase();
 
         switch (lowerStr) {
-            case "high", "2" -> {
-                return Priority.HIGH;
-            }
-            case "medium", "1" -> {
-                return Priority.MEDIUM;
-            }
-            case "low", "0" -> {
-                return Priority.LOW;
-            }
-            default -> throw new InvalidArgumentException("Acceptable values of priority are <HIGH | MEDIUM | LOW>");
+        case "high", "2" -> {
+            return Priority.HIGH;
+        }
+        case "medium", "1" -> {
+            return Priority.MEDIUM;
+        }
+        case "low", "0" -> {
+            return Priority.LOW;
+        }
+        default -> throw new InvalidArgumentException("Acceptable values of priority are <HIGH | MEDIUM | LOW>");
         }
     }
 }

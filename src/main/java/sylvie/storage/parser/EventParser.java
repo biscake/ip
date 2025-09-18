@@ -2,7 +2,6 @@ package sylvie.storage.parser;
 
 import sylvie.exception.IllegalDataException;
 import sylvie.exception.InvalidArgumentException;
-import sylvie.task.Deadline;
 import sylvie.task.Event;
 import sylvie.task.Task;
 

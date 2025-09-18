@@ -4,7 +4,6 @@ import sylvie.exception.IllegalDataException;
 import sylvie.exception.InvalidArgumentException;
 import sylvie.task.Deadline;
 import sylvie.task.Task;
-import sylvie.task.ToDo;
 
 /**
  * Parses input strings to create Deadline tasks.

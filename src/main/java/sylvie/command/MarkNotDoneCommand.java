@@ -15,7 +15,9 @@ public class MarkNotDoneCommand extends Command {
      *
      * @param commandArgs Rest of the user's input after "unmark" command
      */
-    public MarkNotDoneCommand(String commandArgs) { this.commandArgs = commandArgs; }
+    public MarkNotDoneCommand(String commandArgs) {
+        this.commandArgs = commandArgs;
+    }
 
     /**
      * Marks the task specified by a ID as not done.

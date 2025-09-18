@@ -35,6 +35,14 @@ public class Event extends Task {
         this.to = Date.parse(to);
     }
 
+    /**
+     * Creates an Event task with priority.
+     *
+     * @param description description of the task
+     * @param from Start time of the event
+     * @param to End time of the event
+     * @param priority Priority of the task
+     */
     public Event(String description, String from, String to, String priority) throws InvalidArgumentException {
         this(description, from, to);
         this.priority = PriorityParser.parse(priority);

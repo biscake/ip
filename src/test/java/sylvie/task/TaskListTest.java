@@ -10,6 +10,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import sylvie.exception.IllegalDataException;
 import sylvie.exception.InvalidArgumentException;
 import sylvie.exception.StorageException;
 
@@ -50,7 +51,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void loadFromStorage_emptyFile_success() {
+    public void loadFromStorage_emptyFile_success() throws StorageException, IllegalDataException {
         taskList.loadFromStorage();
         assertEquals(0, taskList.size());
     }

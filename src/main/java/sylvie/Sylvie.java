@@ -5,6 +5,8 @@ import java.nio.file.Paths;
 
 import sylvie.command.Command;
 import sylvie.command.parser.CommandParser;
+import sylvie.exception.IllegalDataException;
+import sylvie.exception.StorageException;
 import sylvie.exception.SylvieException;
 import sylvie.task.TaskList;
 
@@ -14,12 +16,26 @@ import sylvie.task.TaskList;
 public class Sylvie {
     private final TaskList taskList;
 
+    /**
+     * Initializes Sylvie with the specified storage file.
+     *
+     * @param fileName Name of the file to store data
+     */
     public Sylvie(String fileName) {
         Path savePath = Paths.get("data", fileName);
         taskList = new TaskList(savePath);
-        taskList.loadFromStorage();
+        try {
+            taskList.loadFromStorage();
+        } catch (StorageException | IllegalDataException e) {
+            // Proceed with an empty task list if loading fails
+        }
     }
 
+    /**
+     * Returns a greeting message.
+     *
+     * @return Greeting message
+     */
     public static String greet() {
         return "Hello! I'm Sylvie\nWhat can I do for you?";
     }

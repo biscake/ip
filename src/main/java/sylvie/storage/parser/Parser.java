@@ -33,7 +33,7 @@ public class Parser {
             task = new EventParser().parse(rest);
         }
         default -> {
-            throw new Error("Failed to read data");
+            throw new IllegalDataException("Failed to read data");
         }
         }
 

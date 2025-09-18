@@ -7,6 +7,9 @@ import sylvie.task.Task;
 import sylvie.task.Task.Priority;
 import sylvie.task.TaskList;
 
+/**
+ * Command to set priority of a task.
+ */
 public class SetPriorityCommand extends Command {
     private final String commandArgs;
 
@@ -15,7 +18,9 @@ public class SetPriorityCommand extends Command {
      *
      * @param commandArgs Rest of the user's input after "priority" command
      */
-    public SetPriorityCommand(String commandArgs) { this.commandArgs = commandArgs; }
+    public SetPriorityCommand(String commandArgs) {
+        this.commandArgs = commandArgs;
+    }
 
     /**
      * Set priority of task.

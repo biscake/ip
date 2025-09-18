@@ -6,6 +6,9 @@ import sylvie.exception.InvalidArgumentException;
  * Abstract class representing a Task with a description and completion status.
  */
 public abstract class Task {
+    /**
+     * Priority levels for tasks.
+     */
     public enum Priority {
         LOW,
         MEDIUM,

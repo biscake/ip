@@ -28,6 +28,13 @@ public class Deadline extends Task {
         this.by = Date.parse(by);
     }
 
+    /**
+     * Creates a Deadline task with priority.
+     *
+     * @param description description of task
+     * @param by deadline of the task
+     * @param priority priority of the task
+     */
     public Deadline(String description, String by, String priority) throws InvalidArgumentException {
         this(description, by);
         this.priority = PriorityParser.parse(priority);

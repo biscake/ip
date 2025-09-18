@@ -16,6 +16,12 @@ public class ToDo extends Task {
         super(description);
     }
 
+    /**
+     * Creates a Todo task with priority.
+     *
+     * @param description Description of the task
+     * @param priority    Priority of the task
+     */
     public ToDo(String description, String priority) throws InvalidArgumentException {
         super(description);
         this.priority = PriorityParser.parse(priority);
