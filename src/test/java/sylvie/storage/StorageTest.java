@@ -1,4 +1,4 @@
-package sylvie.storage;
+package aqua.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -12,15 +12,15 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import sylvie.exception.InvalidArgumentException;
-import sylvie.exception.StorageException;
-import sylvie.task.Task;
+import aqua.exception.InvalidArgumentException;
+import aqua.exception.StorageException;
+import aqua.task.Task;
 
 class StorageTest {
-    private static final Path testPath = Paths.get("data", "sylvie_test.txt");
+    private static final Path testPath = Paths.get("data", "aqua_test.txt");
     private Storage storage;
 
-    class StubToDo extends sylvie.task.Task {
+    class StubToDo extends aqua.task.Task {
         private String description;
 
         public StubToDo(String description) throws InvalidArgumentException {

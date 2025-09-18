@@ -11,13 +11,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sylvie.ui.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aqua.ui.MainWindow">
     <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="130.0" prefWidth="400.0" style="-fx-background-color: #fffcf4; -fx-border-width: 0 0 2 0; -fx-border-color: #eadfd3;">
                <children>
-                  <Label contentDisplay="CENTER" text="Sylvie" textFill="#725248">
+                  <Label contentDisplay="CENTER" text="Aqua" textFill="#725248">
                      <font>
                         <Font name="Microsoft Sans Serif" size="20.0" />
                      </font>
