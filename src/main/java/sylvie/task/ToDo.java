@@ -1,5 +1,6 @@
 package sylvie.task;
 
+import sylvie.command.parser.PriorityParser;
 import sylvie.exception.InvalidArgumentException;
 
 /**
@@ -15,15 +16,19 @@ public class ToDo extends Task {
         super(description);
     }
 
+    public ToDo(String description, String priority) throws InvalidArgumentException {
+        super(description);
+        this.priority = PriorityParser.parse(priority);
+    }
+
     @Override
     public String toString() {
-        String s = String.format("[T]%s", super.toString());
-        return s;
+        return String.format("[T]%s", super.toString());
     }
 
     @Override
     public String toStorageString() {
-        String s = String.format("T | %d | %s", super.isDone ? 1 : 0, super.description);
-        return s;
+        int priority = this.priority == null ? -1 : this.priority.ordinal();
+        return String.format("T | %d | %d | %s", this.isDone ? 1 : 0, priority, this.description);
     }
 }

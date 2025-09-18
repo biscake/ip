@@ -1,6 +1,7 @@
 package sylvie.command;
 
 import sylvie.exception.InvalidArgumentException;
+import sylvie.exception.StorageException;
 import sylvie.task.Event;
 import sylvie.task.Task;
 import sylvie.task.TaskList;
@@ -28,7 +29,7 @@ public class AddEventCommand extends AddTaskCommand {
      *         blank /from or /to
      */
     @Override
-    public String execute(TaskList taskList) throws InvalidArgumentException {
+    public String execute(TaskList taskList) throws InvalidArgumentException, StorageException {
         int fromIndex = commandArgs.indexOf("/from");
         int toIndex = commandArgs.indexOf("/to");
 

@@ -1,5 +1,6 @@
 package sylvie.command;
 import sylvie.exception.InvalidArgumentException;
+import sylvie.exception.StorageException;
 import sylvie.task.Deadline;
 import sylvie.task.Task;
 import sylvie.task.TaskList;
@@ -26,7 +27,7 @@ public class AddDeadlineCommand extends AddTaskCommand {
      * @throws InvalidArgumentException if description is blank, missing /by or blank /by
      */
     @Override
-    public String execute(TaskList taskList) throws InvalidArgumentException {
+    public String execute(TaskList taskList) throws InvalidArgumentException, StorageException {
         int byIndex = commandArgs.indexOf("/by");
 
         if (byIndex != -1) {

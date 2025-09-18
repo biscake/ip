@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sylvie.exception.IllegalDataException;
+import sylvie.exception.StorageException;
 import sylvie.storage.Storage;
 import sylvie.storage.parser.Parser;
 import sylvie.ui.Textbox;
+import sylvie.task.Task.Priority;
 
 /**
  * Manages a list of tasks and handles loading and saving to storage.
@@ -34,11 +36,19 @@ public class TaskList {
      * Adds a task to the task list and saves it to storage.
      * @param task the task to be added
      */
-    public void add(Task task) {
+    public void add(Task task) throws StorageException {
         int oldSize = this.taskList.size();
         this.taskList.add(task);
         assert taskList.size() == oldSize + 1 : "TaskList size should increase by 1 after add";
         storage.add(task);
+    }
+
+    public Task setPriority(int index, Priority priority) throws StorageException {
+        Task task = this.taskList.get(index);
+        storage.updateTaskPriority(task, priority);
+        task.setPriority(priority);
+
+        return task;
     }
 
     /**
@@ -46,7 +56,7 @@ public class TaskList {
      * @param idx the index of the task to be deleted
      * @return the deleted task
      */
-    public Task delete(int idx) {
+    public Task delete(int idx) throws StorageException {
         int oldSize = taskList.size();
         Task task = taskList.get(idx);
         storage.remove(task);
@@ -103,7 +113,7 @@ public class TaskList {
      *
      * @param idx the index of the task to be marked as done
      */
-    public void markTaskDone(int idx) {
+    public void markTaskDone(int idx) throws StorageException {
         Task task = taskList.get(idx);
         storage.updateDoneStatus(task, true);
         task.markDone();
@@ -115,7 +125,7 @@ public class TaskList {
      *
      * @param idx the index of the task to be marked as not done
      */
-    public void markTaskNotDone(int idx) {
+    public void markTaskNotDone(int idx) throws StorageException {
         Task task = taskList.get(idx);
         storage.updateDoneStatus(task, false);
         task.markNotDone();

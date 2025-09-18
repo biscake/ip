@@ -1,16 +1,8 @@
 package sylvie.command.parser;
 
-import sylvie.command.AddDeadlineCommand;
-import sylvie.command.AddEventCommand;
-import sylvie.command.AddTodoCommand;
-import sylvie.command.Command;
-import sylvie.command.DeleteCommand;
-import sylvie.command.ExitCommand;
-import sylvie.command.FindCommand;
-import sylvie.command.ListCommand;
-import sylvie.command.MarkDoneCommand;
-import sylvie.command.MarkNotDoneCommand;
+import sylvie.command.*;
 import sylvie.exception.InvalidCommandException;
+import sylvie.exception.StorageException;
 
 /**
  * Parses user input into commands.
@@ -22,9 +14,9 @@ public class CommandParser {
      * @param input The user's input
      * @return Command specified by the first word of input
      */
-    public static Command parse(String input) throws InvalidCommandException {
+    public static Command parse(String input) throws InvalidCommandException, StorageException {
         String[] parts = input.split("\\s+", 2);
-        assert parts.length == 3 : "Input should contains 2 parts";
+        assert parts.length == 2 : "Input should contains 2 parts";
         String command = parts.length > 0 ? parts[0].toLowerCase() : "";
         String commandArgs = parts.length > 1 ? parts[1] : "";
 
@@ -55,6 +47,9 @@ public class CommandParser {
         }
         case "find" -> {
             return new FindCommand(commandArgs);
+        }
+        case "priority" -> {
+            return new SetPriorityCommand(commandArgs);
         }
         default -> throw new InvalidCommandException("Sorry! I don't understand what you mean.");
         }

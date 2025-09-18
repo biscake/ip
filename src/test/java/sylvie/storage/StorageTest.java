@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import sylvie.exception.InvalidArgumentException;
+import sylvie.exception.StorageException;
 import sylvie.task.Task;
 
 class StorageTest {
@@ -59,7 +60,7 @@ class StorageTest {
     }
 
     @Test
-    public void add_toDoTask_success() throws IOException, InvalidArgumentException {
+    public void add_toDoTask_success() throws IOException, InvalidArgumentException, StorageException {
         Task todo = new StubToDo("Test task");
         storage.add(todo);
         List<String> lines = storage.load();
@@ -68,7 +69,7 @@ class StorageTest {
     }
 
     @Test
-    public void remove_toDoTask_success() throws IOException, InvalidArgumentException {
+    public void remove_toDoTask_success() throws IOException, InvalidArgumentException, StorageException {
         Task todo1 = new StubToDo("Task 1");
         Task todo2 = new StubToDo("Task 2");
         storage.add(todo1);
@@ -82,7 +83,7 @@ class StorageTest {
     }
 
     @Test
-    public void updateDoneStatus_toDoTask_success() throws IOException, InvalidArgumentException {
+    public void updateDoneStatus_toDoTask_success() throws IOException, InvalidArgumentException, StorageException {
         Task todo = new StubToDo("Done task");
         storage.add(todo);
 

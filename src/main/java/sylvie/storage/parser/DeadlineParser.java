@@ -4,6 +4,7 @@ import sylvie.exception.IllegalDataException;
 import sylvie.exception.InvalidArgumentException;
 import sylvie.task.Deadline;
 import sylvie.task.Task;
+import sylvie.task.ToDo;
 
 /**
  * Parses input strings to create Deadline tasks.
@@ -22,9 +23,14 @@ public class DeadlineParser extends TaskParser {
         String[] parts = input.split("\\^");
         String description = parts.length > 0 ? parts[0].trim() : "";
         String deadline = parts.length > 1 ? parts[1].trim() : "";
+        String priority = parts.length > 2 ? parts[2].trim() : "";
 
         try {
-            return new Deadline(description, deadline);
+            if (priority.isBlank()) {
+                return new Deadline(description, deadline);
+            } else {
+                return new Deadline(description, deadline, priority);
+            }
         } catch (InvalidArgumentException e) {
             throw new IllegalDataException("Failed to load deadline data");
         }

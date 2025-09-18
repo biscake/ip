@@ -13,12 +13,17 @@ import sylvie.exception.InvalidArgumentException;
  * Utility class for parsing and formatting dates.
  */
 public class Date {
-    private static final List<DateTimeFormatter> FORMATTERS = List.of(
-        DateTimeFormatter.ISO_LOCAL_DATE,
-        DateTimeFormatter.ISO_LOCAL_DATE_TIME,
-        DateTimeFormatter.ofPattern("ddMMyy"),
-        DateTimeFormatter.ofPattern("ddMMyy HHmm")
+    private static final List<String> PATTERNS = List.of(
+            "ddMMyyyy",
+            "ddMMyyyy HH:mm",
+            "dd-MM-yyyy HH:mm",
+            "dd-MM-yyyy",
+            "dd/MM/yyyy",
+            "MM-dd-yyyy HH:mm"
     );
+
+    private static final List<DateTimeFormatter> FORMATTERS =
+            PATTERNS.stream().map(DateTimeFormatter::ofPattern).toList();
 
     /**
      * Parses a date string into a Temporal object (LocalDate or LocalDateTime).
@@ -40,9 +45,9 @@ public class Date {
             }
         }
 
-        StringBuilder errorMessage = new StringBuilder("Invalid date format\nSupported format:\n");
-        for (int i = 0; i < FORMATTERS.size(); i++) {
-            errorMessage.append(FORMATTERS.get(i).toString()).append("\n");
+        StringBuilder errorMessage = new StringBuilder("Invalid date format\nSupported format:\n\n");
+        for (String pattern : PATTERNS) {
+            errorMessage.append(pattern).append("\n");
         }
 
         throw new InvalidArgumentException(errorMessage.toString());

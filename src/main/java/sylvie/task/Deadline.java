@@ -2,6 +2,7 @@ package sylvie.task;
 
 import java.time.temporal.Temporal;
 
+import sylvie.command.parser.PriorityParser;
 import sylvie.exception.InvalidArgumentException;
 import sylvie.time.Date;
 
@@ -24,11 +25,12 @@ public class Deadline extends Task {
             throw new InvalidArgumentException("Deadline (/by) cannot be empty");
         }
 
-        try {
-            this.by = Date.parse(by);
-        } catch (InvalidArgumentException e) {
-            throw new InvalidArgumentException("Invalid deadline format");
-        }
+        this.by = Date.parse(by);
+    }
+
+    public Deadline(String description, String by, String priority) throws InvalidArgumentException {
+        this(description, by);
+        this.priority = PriorityParser.parse(priority);
     }
 
     @Override
@@ -40,13 +42,12 @@ public class Deadline extends Task {
             deadlineString = "";
         }
 
-        String s = String.format("[D]%s (by: %s)", super.toString(), deadlineString);
-        return s;
+        return String.format("[D]%s (by: %s)", super.toString(), deadlineString);
     }
 
     @Override
     public String toStorageString() {
-        String s = String.format("D | %d | %s ^ %s", super.isDone ? 1 : 0, super.description, this.by);
-        return s;
+        int priority = this.priority == null ? -1 : this.priority.ordinal();
+        return String.format("D | %d | %d | %s ^ %s", this.isDone ? 1 : 0, priority, this.description, this.by);
     }
 }

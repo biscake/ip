@@ -11,8 +11,10 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
+import sylvie.exception.StorageException;
 import sylvie.task.Task;
 import sylvie.ui.Textbox;
+import sylvie.task.Task.Priority;
 
 /**
  * Handles loading and saving of Sylvie data to a file.
@@ -53,12 +55,12 @@ public class Storage {
      *
      * @param task the task to be saved
      */
-    public void add(Task task) {
+    public void add(Task task) throws StorageException {
         try (BufferedWriter writer = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
             writer.write(task.toStorageString());
             writer.newLine();
         } catch (IOException e) {
-            new Textbox("Failed to save data.").print();
+            throw new StorageException();
         }
     }
 
@@ -67,7 +69,7 @@ public class Storage {
      *
      * @param task the task to be removed
      */
-    public void remove(Task task) {
+    public void remove(Task task) throws StorageException {
         try {
             Path tempPath = this.path.getParent().resolve("temp.txt");
             Files.createDirectories(tempPath.getParent());
@@ -92,7 +94,7 @@ public class Storage {
 
             Files.move(tempPath, path, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            new Textbox("Failed to save data.").print();
+            throw new StorageException();
         }
     }
 
@@ -102,7 +104,7 @@ public class Storage {
      * @param task the task to be updated
      * @param isDone the new done status of the task
      */
-    public void updateDoneStatus(Task task, boolean isDone) {
+    public void updateDoneStatus(Task task, boolean isDone) throws StorageException {
         try {
             Path tempPath = Paths.get("data", "temp.txt");
             Files.createDirectories(tempPath.getParent());
@@ -132,7 +134,42 @@ public class Storage {
 
             Files.move(tempPath, path, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            new Textbox("Failed to save data.").print();
+            throw new StorageException();
+        }
+    }
+
+    public void updateTaskPriority(Task task, Priority priority) throws StorageException {
+        try {
+            Path tempPath = Paths.get("data", "temp.txt");
+            Files.createDirectories(tempPath.getParent());
+            Files.deleteIfExists(tempPath);
+            Files.createFile(tempPath);
+
+            try (
+                    BufferedReader reader = Files.newBufferedReader(path);
+                    BufferedWriter writer = Files.newBufferedWriter(tempPath);
+            ) {
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    System.out.println(task.toStorageString());
+                    if (line.trim().equals(task.toStorageString())) {
+                        String[] parts = line.split("\\|");
+                        for (int i = 0; i < parts.length; i++) {
+                            parts[i] = parts[i].trim();
+                        }
+
+                        parts[2] = String.valueOf(priority.ordinal());
+                        line = String.join(" | ", parts);
+                    }
+                    writer.write(line.trim());
+                    writer.newLine();
+                }
+            }
+
+            Files.move(tempPath, path, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            throw new StorageException();
         }
     }
 }

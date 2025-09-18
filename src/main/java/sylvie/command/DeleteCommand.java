@@ -1,6 +1,7 @@
 package sylvie.command;
 
 import sylvie.exception.InvalidArgumentException;
+import sylvie.exception.StorageException;
 import sylvie.task.Task;
 import sylvie.task.TaskList;
 
@@ -26,7 +27,7 @@ public class DeleteCommand extends Command {
      * @throws InvalidArgumentException if ID of task to be deleted is invalid
      */
     @Override
-    public String execute(TaskList taskList) throws InvalidArgumentException {
+    public String execute(TaskList taskList) throws InvalidArgumentException, StorageException {
         try {
             int index = Integer.parseInt(commandArgs) - 1; // -1 since ArrayList is 0-indexed
             if (index < 0 || index >= taskList.size()) {

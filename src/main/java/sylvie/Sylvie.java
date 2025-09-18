@@ -29,7 +29,7 @@ public class Sylvie {
             Command command = CommandParser.parse(input);
             return command.execute(taskList);
         } catch (SylvieException e) {
-            return "Sorry I don't quite understand what you mean";
+            return e.getMessage();
         }
     }
 }

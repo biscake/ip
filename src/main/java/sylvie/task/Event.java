@@ -2,6 +2,7 @@ package sylvie.task;
 
 import java.time.temporal.Temporal;
 
+import sylvie.command.parser.PriorityParser;
 import sylvie.exception.InvalidArgumentException;
 import sylvie.time.Date;
 
@@ -30,12 +31,13 @@ public class Event extends Task {
             throw new InvalidArgumentException("End date (/to) cannot be empty");
         }
 
-        try {
-            this.from = Date.parse(from);
-            this.to = Date.parse(to);
-        } catch (InvalidArgumentException e) {
-            throw new InvalidArgumentException("Invalid deadline format");
-        }
+        this.from = Date.parse(from);
+        this.to = Date.parse(to);
+    }
+
+    public Event(String description, String from, String to, String priority) throws InvalidArgumentException {
+        this(description, from, to);
+        this.priority = PriorityParser.parse(priority);
     }
 
     @Override
@@ -50,13 +52,13 @@ public class Event extends Task {
             toString = (to != null ? to.toString() : "invalid");
         }
 
-        String s = String.format("[E]%s (from: %s, to: %s)", super.toString(), fromString, toString);
-        return s;
+        return String.format("[E]%s (from: %s, to: %s)", super.toString(), fromString, toString);
     }
 
     @Override
     public String toStorageString() {
-        String s = String.format("E | %d | %s ^ %s ^ %s", super.isDone ? 1 : 0, super.description, this.from, this.to);
-        return s;
+        int priority = this.priority == null ? -1 : this.priority.ordinal();
+        return String.format("E | %d | %d | %s ^ %s ^ %s",
+                this.isDone ? 1 : 0, priority, this.description, this.from, this.to);
     }
 }

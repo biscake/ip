@@ -6,8 +6,15 @@ import sylvie.exception.InvalidArgumentException;
  * Abstract class representing a Task with a description and completion status.
  */
 public abstract class Task {
+    public enum Priority {
+        LOW,
+        MEDIUM,
+        HIGH,
+    }
+
     protected String description;
     protected boolean isDone;
+    protected Priority priority;
 
     /**
      * Create a Task
@@ -21,6 +28,10 @@ public abstract class Task {
 
         this.description = description;
         this.isDone = false;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
     /**
@@ -44,7 +55,9 @@ public abstract class Task {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(isDone ? "[X]" : "[ ]").append(" ").append(this.description);
+        sb.append(isDone ? "[X]" : "[ ]").append(" ")
+                .append(this.description).append(" ")
+                .append(this.priority == null ? "" : String.format("(Priority: %s)", this.priority));
         return sb.toString();
     }
 

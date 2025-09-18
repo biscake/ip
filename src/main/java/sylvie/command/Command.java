@@ -1,6 +1,7 @@
 package sylvie.command;
 
 import sylvie.exception.InvalidArgumentException;
+import sylvie.exception.StorageException;
 import sylvie.task.TaskList;
 
 /**
@@ -11,7 +12,7 @@ public abstract class Command {
      * @param taskList List of task
      * @return response message of command
      */
-    public abstract String execute(TaskList taskList) throws InvalidArgumentException;
+    public abstract String execute(TaskList taskList) throws InvalidArgumentException, StorageException;
 
     /**
      * Returns if the command is an exit command.

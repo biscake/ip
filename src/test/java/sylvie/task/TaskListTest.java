@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import sylvie.exception.InvalidArgumentException;
+import sylvie.exception.StorageException;
 
 public class TaskListTest {
     private static final Path testPath = Path.of("data", "tasklist_test.txt");
@@ -55,7 +56,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void add_toDoTask_success() throws InvalidArgumentException {
+    public void add_toDoTask_success() throws InvalidArgumentException, StorageException {
         Task todo = new StubToDo("Test task");
         taskList.add(todo);
         assertEquals(1, taskList.size());

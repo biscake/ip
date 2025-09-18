@@ -20,7 +20,14 @@ public class TodoParser extends TaskParser {
     @Override
     public Task parse(String input) throws IllegalDataException {
         try {
-            return new ToDo(input.trim());
+            String[] parts = input.split("\\^");
+            String priority = parts.length > 1 ? parts[1].trim() : "";
+
+            if (priority.isBlank()) {
+                return new ToDo(input.trim());
+            } else {
+                return new ToDo(input.trim(), priority);
+            }
         } catch (InvalidArgumentException e) {
             throw new IllegalDataException("Failed to load todo data.");
         }

@@ -2,6 +2,7 @@ package sylvie.storage.parser;
 
 import sylvie.exception.IllegalDataException;
 import sylvie.task.Task;
+import sylvie.task.Task.Priority;
 
 /**
  * Parses task data from strings.
@@ -17,21 +18,19 @@ public class Parser {
         String[] parts = input.split("\\|");
         String type = parts[0].trim();
         boolean isDone = parts[1].trim().equals("1");
-        String rest = parts[2].trim();
+        int priority = Integer.parseInt(parts[2].trim());
+        String rest = parts[3].trim();
         Task task;
 
         switch (type) {
         case "T" -> {
             task = new TodoParser().parse(rest);
-            break;
         }
         case "D" -> {
             task = new DeadlineParser().parse(rest);
-            break;
         }
         case "E" -> {
             task = new EventParser().parse(rest);
-            break;
         }
         default -> {
             throw new Error("Failed to read data");
@@ -40,6 +39,10 @@ public class Parser {
 
         if (isDone) {
             task.markDone();
+        }
+
+        if (priority != -1) {
+            task.setPriority(Priority.values()[priority]);
         }
 
         return task;

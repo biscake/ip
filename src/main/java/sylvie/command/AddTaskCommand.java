@@ -1,5 +1,6 @@
 package sylvie.command;
 
+import sylvie.exception.StorageException;
 import sylvie.task.Task;
 import sylvie.task.TaskList;
 
@@ -13,7 +14,7 @@ public abstract class AddTaskCommand extends Command {
      * @param task Task to be added
      * @param taskList List that the task should be added to
      */
-    public String addTask(Task task, TaskList taskList) {
+    public String addTask(Task task, TaskList taskList) throws StorageException {
         String s = String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task,
                 taskList.size() + 1);
         taskList.add(task);

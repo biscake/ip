@@ -1,6 +1,7 @@
 package sylvie.command;
 
 import sylvie.exception.InvalidArgumentException;
+import sylvie.exception.StorageException;
 import sylvie.task.Task;
 import sylvie.task.TaskList;
 import sylvie.task.ToDo;
@@ -26,7 +27,7 @@ public class AddTodoCommand extends AddTaskCommand {
      * @throws InvalidArgumentException if description is blank
      */
     @Override
-    public String execute(TaskList taskList) throws InvalidArgumentException {
+    public String execute(TaskList taskList) throws InvalidArgumentException, StorageException {
         if (commandArgs.isBlank()) {
             throw new InvalidArgumentException("Description of a todo cannot be empty.");
         }
