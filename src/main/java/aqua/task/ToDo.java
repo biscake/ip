@@ -34,7 +34,7 @@ public class ToDo extends Task {
 
     @Override
     public String toStorageString() {
-        int priority = this.priority == null ? -1 : this.priority.ordinal();
-        return String.format("T | %d | %d | %s", this.isDone ? 1 : 0, priority, this.description);
+        int priorityValue = this.priority == null ? -1 : this.priority.ordinal();
+        return String.format("T | %d | %d | %s", this.isDone ? 1 : 0, priorityValue, this.description);
     }
 }
