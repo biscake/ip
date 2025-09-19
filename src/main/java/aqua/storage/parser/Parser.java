@@ -13,6 +13,7 @@ public class Parser {
      *
      * @param input The user's input
      * @return task specified by the input string
+     * @throws IllegalDataException If the data is illegal or cannot be parsed
      */
     public static Task parse(String input) throws IllegalDataException {
         String[] parts = input.split("\\|");

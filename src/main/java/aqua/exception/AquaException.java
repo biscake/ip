@@ -7,7 +7,7 @@ public class AquaException extends Exception {
     /**
      * Constructor for Aquaception
      *
-     * @param message
+     * @param message Error message
      */
     public AquaException(String message) {
         super(message);

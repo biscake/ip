@@ -12,6 +12,7 @@ public class PriorityParser {
      *
      * @param input The user's input
      * @return Priority specified by the input
+     * @throws InvalidArgumentException If the priority is not recognized
      */
     public static Priority parse(String input) throws InvalidArgumentException {
         String lowerStr = input.toLowerCase();
