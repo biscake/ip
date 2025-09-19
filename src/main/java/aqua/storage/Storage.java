@@ -21,6 +21,11 @@ import aqua.task.Task.Priority;
 public class Storage {
     private final Path path;
 
+    /**
+     * Constructor for Storage
+     *
+     * @param path Path to the storage file
+     */
     public Storage(Path path) {
         this.path = path;
     }
@@ -29,7 +34,7 @@ public class Storage {
      * Loads Aqua data from filepath.
      *
      * @return List of line of data stored
-     * @throws IOException
+     * @throws StorageException If there is an error with storage
      */
     public List<String> load() throws StorageException {
         try {
@@ -58,6 +63,7 @@ public class Storage {
      * Saves a task to the storage file.
      *
      * @param task the task to be saved
+     * @throws StorageException if an I/O error occurs
      */
     public void add(Task task) throws StorageException {
         try (BufferedWriter writer = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
@@ -72,6 +78,7 @@ public class Storage {
      * Removes a task from the storage file.
      *
      * @param task the task to be removed
+     * @throws StorageException if an I/O error occurs
      */
     public void remove(Task task) throws StorageException {
         try {
@@ -140,6 +147,7 @@ public class Storage {
      *
      * @param task the task to be updated
      * @param isDone the new done status of the task
+     * @throws StorageException if an I/O error occurs
      */
     public void updateDoneStatus(Task task, boolean isDone) throws StorageException {
         updateTaskInFile(task, parts -> {
@@ -153,6 +161,7 @@ public class Storage {
      *
      * @param task the task to be updated
      * @param priority the new priority of the task
+     * @throws StorageException if an I/O error occurs
      */
     public void updateTaskPriority(Task task, Priority priority) throws StorageException {
         updateTaskInFile(task, parts -> {

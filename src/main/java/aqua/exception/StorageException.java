@@ -7,7 +7,7 @@ public class StorageException extends AquaException {
     /**
      * Creates a new StorageException with the specified message.
      *
-     * @param message
+     * @param message the detail message
      */
     public StorageException(String message) {
         super(message);

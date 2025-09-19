@@ -15,14 +15,26 @@ public abstract class Task {
         HIGH,
     }
 
+    /**
+     * Description of the task
+     */
     protected String description;
+
+    /**
+     * Completion status of the task
+     */
     protected boolean isDone;
+
+    /**
+     * Priority of the task
+     */
     protected Priority priority;
 
     /**
      * Create a Task
      *
      * @param description description of the task
+     * @throws InvalidArgumentException If the description is empty
      */
     public Task(String description) throws InvalidArgumentException {
         if (description.isBlank()) {
@@ -33,6 +45,11 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /**
+     * Sets the priority of the task.
+     *
+     * @param priority The priority to set
+     */
     public void setPriority(Priority priority) {
         this.priority = priority;
     }
@@ -51,6 +68,11 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /**
+     * Returns the description of the task.
+     *
+     * @return description of the task
+     */
     public String getDescription() {
         return this.description;
     }
@@ -67,7 +89,7 @@ public abstract class Task {
     /**
      * Returns the string representation of the task to be stored in the storage file.
      *
-     * @return
+     * @return String representation of the task for storage
      */
     public abstract String toStorageString();
 }

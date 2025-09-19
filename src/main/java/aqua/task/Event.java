@@ -19,6 +19,7 @@ public class Event extends Task {
      * @param description description of the task
      * @param from Start time of the event
      * @param to End time of the event
+     * @throws InvalidArgumentException If the description, start time or end time is empty
      */
     public Event(String description, String from, String to) throws InvalidArgumentException {
         super(description);
@@ -42,6 +43,7 @@ public class Event extends Task {
      * @param from Start time of the event
      * @param to End time of the event
      * @param priority Priority of the task
+     * @throws InvalidArgumentException If the description, start time, end time or priority is empty or invalid
      */
     public Event(String description, String from, String to, String priority) throws InvalidArgumentException {
         this(description, from, to);

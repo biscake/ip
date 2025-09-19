@@ -7,7 +7,7 @@ public class IllegalDataException extends AquaException {
     /**
      * Constructor for IllegalDataException
      *
-     * @param message
+     * @param message Error message
      */
     public IllegalDataException(String message) {
         super(message);

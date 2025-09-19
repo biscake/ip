@@ -7,7 +7,7 @@ public class InvalidArgumentException extends AquaException {
     /**
      * Constructor for InvalidArgumentException
      *
-     * @param message
+     * @param message Error message
      */
     public InvalidArgumentException(String message) {
         super(message);

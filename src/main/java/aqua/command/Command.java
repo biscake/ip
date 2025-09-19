@@ -11,6 +11,8 @@ public abstract class Command {
     /**
      * @param taskList List of task
      * @return response message of command
+     * @throws InvalidArgumentException If the command has invalid arguments
+     * @throws StorageException If there is an error with storage
      */
     public abstract String execute(TaskList taskList) throws InvalidArgumentException, StorageException;
 
