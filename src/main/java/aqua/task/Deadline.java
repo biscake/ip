@@ -54,7 +54,7 @@ public class Deadline extends Task {
 
     @Override
     public String toStorageString() {
-        int priority = this.priority == null ? -1 : this.priority.ordinal();
-        return String.format("D | %d | %d | %s ^ %s", this.isDone ? 1 : 0, priority, this.description, this.by);
+        int priorityOrdinal = this.priority == null ? -1 : this.priority.ordinal();
+        return String.format("D | %d | %d | %s ^ %s", this.isDone ? 1 : 0, priorityOrdinal, this.description, this.by);
     }
 }

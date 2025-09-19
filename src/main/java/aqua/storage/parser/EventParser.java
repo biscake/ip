@@ -23,14 +23,9 @@ public class EventParser extends TaskParser {
         String description = parts.length > 0 ? parts[0].trim() : "";
         String from = parts.length > 1 ? parts[1].trim() : "";
         String to = parts.length > 2 ? parts[2].trim() : "";
-        String priority = parts.length > 2 ? parts[2].trim() : "";
 
         try {
-            if (priority.isBlank()) {
-                return new Event(description, from, to);
-            } else {
-                return new Event(description, from, to, priority);
-            }
+            return new Event(description, from, to);
         } catch (InvalidArgumentException e) {
             throw new IllegalDataException("Failed to load event data");
         }

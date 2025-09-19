@@ -65,8 +65,8 @@ public class Event extends Task {
 
     @Override
     public String toStorageString() {
-        int priority = this.priority == null ? -1 : this.priority.ordinal();
+        int priorityOrdinal = this.priority == null ? -1 : this.priority.ordinal();
         return String.format("E | %d | %d | %s ^ %s ^ %s",
-                this.isDone ? 1 : 0, priority, this.description, this.from, this.to);
+                this.isDone ? 1 : 0, priorityOrdinal, this.description, this.from, this.to);
     }
 }

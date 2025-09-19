@@ -16,10 +16,17 @@ public class Date {
     private static final List<String> PATTERNS = List.of(
             "ddMMyyyy",
             "ddMMyyyy HH:mm",
+            "ddMMyyyy HHmm",
+            "dd-MM-yyyy HHmm",
             "dd-MM-yyyy HH:mm",
             "dd-MM-yyyy",
+            "dd-MM-yyyy HHmm",
+            "dd-MM-yyyy HH:mm",
             "dd/MM/yyyy",
-            "MM-dd-yyyy HH:mm"
+            "yyyy-MM-dd",
+            "yyyy-MM-dd HH:mm",
+            "yyyy-MM-dd'T'HH:mm",
+            "yyyy-MM-dd'T'HH:mm:ss"
     );
 
     private static final List<DateTimeFormatter> FORMATTERS =
