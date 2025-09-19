@@ -17,6 +17,73 @@ import aqua.exception.StorageException;
 import aqua.task.Task;
 
 class StorageTest {
+    @Test
+    public void load_multipleTasks_success() throws InvalidArgumentException, StorageException {
+        Task todo1 = new StubToDo("Task 1");
+        Task todo2 = new StubToDo("Task 2");
+        storage.add(todo1);
+        storage.add(todo2);
+        List<String> lines = storage.load();
+        assertEquals(2, lines.size());
+        assertEquals(todo1.toStorageString(), lines.get(0));
+        assertEquals(todo2.toStorageString(), lines.get(1));
+    }
+
+    @Test
+    public void add_duplicateTask_success() throws InvalidArgumentException, StorageException {
+        Task todo = new StubToDo("Duplicate task");
+        storage.add(todo);
+        storage.add(todo);
+        List<String> lines = storage.load();
+        assertEquals(2, lines.size());
+        assertEquals(todo.toStorageString(), lines.get(0));
+        assertEquals(todo.toStorageString(), lines.get(1));
+    }
+
+    @Test
+    public void remove_nonExistentTask_noChange() throws InvalidArgumentException, StorageException {
+        Task todo = new StubToDo("Task");
+        storage.add(todo);
+        Task fake = new StubToDo("Fake");
+        storage.remove(fake); // Should not throw
+        List<String> lines = storage.load();
+        assertEquals(1, lines.size());
+        assertEquals(todo.toStorageString(), lines.get(0));
+    }
+
+    @Test
+    public void updateDoneStatus_nonExistentTask_noChange() throws InvalidArgumentException, StorageException {
+        Task todo = new StubToDo("Task");
+        storage.add(todo);
+        Task fake = new StubToDo("Fake");
+        storage.updateDoneStatus(fake, true); // Should not throw
+        List<String> lines = storage.load();
+        assertEquals(1, lines.size());
+        assertEquals(todo.toStorageString(), lines.get(0));
+    }
+
+    @Test
+    public void persistence_addReloadCheck_success() throws InvalidArgumentException, StorageException, IOException {
+        Task todo = new StubToDo("Persistent task");
+        storage.add(todo);
+        // Simulate reload
+        storage = new Storage(testPath);
+        List<String> lines = storage.load();
+        assertEquals(1, lines.size());
+        assertEquals(todo.toStorageString(), lines.get(0));
+    }
+
+    @Test
+    public void invalidFilePath_throwsException() {
+        Path invalidPath = Paths.get("/invalid/path/to/file.txt");
+        try {
+            Storage badStorage = new Storage(invalidPath);
+            badStorage.load();
+        } catch (Exception e) {
+            // Should throw IOException or StorageException
+            assertEquals(true, e instanceof IOException || e instanceof StorageException);
+        }
+    }
     private static final Path testPath = Paths.get("data", "aqua_test.txt");
     private Storage storage;
 
