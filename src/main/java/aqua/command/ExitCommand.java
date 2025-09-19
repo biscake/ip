@@ -11,6 +11,9 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList) {
+        System.exit(0);
+        
+        // This line will never be reached, but is required for compilation.
         return "Bye bye! Hope to see you again soon!";
     }
 
