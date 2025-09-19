@@ -36,10 +36,14 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(
                 DialogBox.getAquaDialog(Aqua.greet(), aquaImage)
         );
+        scrollPane.viewportBoundsProperty().addListener((obs, oldVal, newVal) -> {
+            dialogContainer.setPrefWidth(newVal.getWidth());
+        });
     }
 
     /**
      * Injects the Aqua instance
+     * @param s The Aqua instance
      */
     public void setAqua(Aqua s) {
         aqua = s;

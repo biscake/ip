@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="BOTTOM_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" stylesheets="@../css/dialog.css" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="BOTTOM_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../css/dialog.css" type="javafx.scene.layout.HBox" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-      <VBox prefHeight="201.0" prefWidth="390.0">
+      <VBox prefHeight="201.0" HBox.hgrow="ALWAYS">
          <children>
             <HBox fx:id="textBoxContainer" prefHeight="134.0" prefWidth="404.0" VBox.vgrow="ALWAYS">
                <children>
                   <Region prefHeight="115.0" prefWidth="50.0" />
-                    <Label fx:id="dialog" alignment="TOP_LEFT" minHeight="-Infinity" style="-fx-text-fill: #674544;" text="Label" textFill="#674544" wrapText="true" maxWidth="250.0">
+                    <Label fx:id="dialog" alignment="TOP_LEFT" maxWidth="Infinity" minHeight="-Infinity" style="-fx-text-fill: #674544;" text="Label" textFill="#674544" wrapText="true">
                      <font>
                         <Font name="Microsoft Sans Serif" size="12.0" />
                      </font>

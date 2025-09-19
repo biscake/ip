@@ -67,6 +67,13 @@ public class DialogBox extends HBox {
         this.textBoxContainer.setAlignment(Pos.TOP_RIGHT);
     }
 
+    /**
+     * Creates a dialog box for the user.
+     *
+     * @param text The text to be displayed
+     * @param img The image to be displayed
+     * @return A dialog box for the user
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.dialog.getStyleClass().add("user-dialog");
@@ -74,9 +81,16 @@ public class DialogBox extends HBox {
         return db;
     }
 
+    /**
+     * Creates a dialog box for Aqua.
+     *
+     * @param text The text to be displayed
+     * @param img The image to be displayed
+     * @return A dialog box for Aqua
+     */
     public static DialogBox getAquaDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.dialog.getStyleClass().add("aquaialog");
+        db.dialog.getStyleClass().add("aqua-dialog");
         return db;
     }
 }

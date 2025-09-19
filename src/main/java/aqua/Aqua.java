@@ -40,6 +40,12 @@ public class Aqua {
         return "Hello! I'm Aqua\nWhat can I do for you?";
     }
 
+    /**
+     * Processes user input and returns the corresponding response.
+     *
+     * @param input User input string
+     * @return Response message
+     */
     public String getResponse(String input) {
         try {
             Command command = CommandParser.parse(input);
