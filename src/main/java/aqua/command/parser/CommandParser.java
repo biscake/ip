@@ -23,6 +23,8 @@ public class CommandParser {
      *
      * @param input The user's input
      * @return Command specified by the first word of input
+     * @throws InvalidCommandException If the command is not recognized
+     * @throws StorageException If there is an error with storage
      */
     public static Command parse(String input) throws InvalidCommandException, StorageException {
         String[] parts = input.split("\\s+", 2);

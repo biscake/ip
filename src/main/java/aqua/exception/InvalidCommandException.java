@@ -7,7 +7,7 @@ public class InvalidCommandException extends AquaException {
     /**
      * Constructor for InvalidCommandException
      *
-     * @param message
+     * @param message Error message
      */
     public InvalidCommandException(String message) {
         super(message);

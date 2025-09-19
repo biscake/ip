@@ -17,6 +17,7 @@ public class Deadline extends Task {
      *
      * @param description description of task
      * @param by deadline of the task
+     * @throws InvalidArgumentException If the description or deadline is empty
      */
     public Deadline(String description, String by) throws InvalidArgumentException {
         super(description);
@@ -34,6 +35,7 @@ public class Deadline extends Task {
      * @param description description of task
      * @param by deadline of the task
      * @param priority priority of the task
+     * @throws InvalidArgumentException If the description, deadline or priority is empty or invalid
      */
     public Deadline(String description, String by, String priority) throws InvalidArgumentException {
         this(description, by);
