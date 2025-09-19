@@ -1,7 +1,8 @@
 # Aqua User Guide
 
-Aqua is a task management chatbot that supports a variety of commands for managing todos, deadlines, events, and priorities.  
+Aqua is a task management chatbot that supports a variety of commands for managing todos, deadlines, events, and priorities.
 
+![Screenshot of Todo List](./Ui.png "Todo List Example")\
 Note:
 - All commands are **case-insensitive**.
 - Data are saved locally on every command run, you don't have to worry about losing your data if you exit the program prematurely.
